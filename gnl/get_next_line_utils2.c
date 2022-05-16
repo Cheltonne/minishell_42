@@ -1,35 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strjoin.c                                       :+:      :+:    :+:   */
+/*   get_next_line_utils2.c                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chajax <chajax@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/06/02 14:23:41 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/16 21:04:49 by chajax           ###   ########.fr       */
+/*   Created: 2022/02/25 20:53:18 by chajax            #+#    #+#             */
+/*   Updated: 2022/02/25 21:00:28 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "get_next_line.h"
 
-char	*ft_strjoin(char *s1, char *s2)
+void	gnl_helper(int fd, char **export)
 {
-	int		i;
-	int		o;
-	int		total_len;
-	char	*new;
-
-	i = 0;
-	o = 0;
-	total_len = ft_strlen(s1) + ft_strlen(s2) + 1;
-	new = malloc(sizeof(char) * total_len);
-	if (!new)
-		return (NULL);
-	while (s1[i])
-		new[o++] = s1[i++];
-	i = 0;
-	while (s2[i])
-		new[o++] = s2[i++];
-	new[o] = '\0';
-	return (new);
+	free(export[fd]);
+	return ;
 }

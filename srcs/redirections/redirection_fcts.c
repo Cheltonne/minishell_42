@@ -6,7 +6,7 @@
 /*   By: chajax <chajax@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 15:45:09 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/16 19:10:34 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/16 20:53:38 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,16 +21,23 @@ void	redir_anal(t_tklist **head, t_cmd **ret, int *i)
 		else
 			(*ret)->cmd[(*i++)] = NULL;
 	}
-	if ((*head)->type == R_REDIR)
+	else if ((*head)->type == R_REDIR)
 	{
 		if (right_redirection(ret, &head))
 			;
 		else
 			(*ret)->cmd[(*i++)] = NULL;
 	}
-	if ((*head)->type == APPEND)
+	else if ((*head)->type == APPEND)
 	{
 		if (append(ret, &head))
+			;
+		else
+			(*ret)->cmd[(*i++)] = NULL;
+	}
+	else if ((*head)->type == HERE_DOC)
+	{
+		if (here_doc(ret, &head))
 			;
 		else
 			(*ret)->cmd[(*i++)] = NULL;
@@ -84,6 +91,31 @@ int	append(t_cmd **ret, t_tklist ***head)
 		{
 			ft_putstr_fd((**head)->value, 2);
 			ft_putstr_fd(": No such file or directory\n", 2);
+			return (FAILURE);
+		}
+		**head = (**head)->next;
+	}
+	return (SUCCESS);
+}
+
+int	here_doc(t_cmd **ret, t_tklist ***head)
+{
+	int		buf_fd;
+
+	while ((**head)->type != END && (**head)->type != LITTERAL)
+		**head = (**head)->next;
+	if ((**head)->type != END)
+	{
+		buf_fd = open(".here_doc", O_CREAT | O_WRONLY | O_TRUNC, 0644);
+		if (buf_fd < 0)
+			exit(EXIT_FAILURE);
+		query_user((**head)->value, &buf_fd);
+		close(buf_fd);
+		(*ret)->in = open(".here_doc", O_RDONLY);
+		if ((*ret)->out < 0)
+		{
+			unlink(".here_doc");
+			ft_putstr_fd("Couldn't open here_document buffer file.\n", 2);
 			return (FAILURE);
 		}
 		**head = (**head)->next;

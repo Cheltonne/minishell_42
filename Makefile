@@ -33,12 +33,19 @@ ERROR_FILES = error_handling \
 
 REDIR_FILES = pipe_utils_01 \
 			  redirection_fcts \
+			  redirection_utils \
 
 SIG_FILES = signal \
+
+GNL_FILES = get_next_line \
+			get_next_line_utils \
+			get_next_line_utils2 \
 
 # *****************************DIRECTORIES************************************ #
 
 LIBFT_DIR = libft/
+
+GNL_DIR = gnl/
 
 SRCS_DIR = srcs/
 
@@ -66,6 +73,7 @@ SRCS =	$(addprefix $(SRCS_DIR), $(addsuffix .c, $(FILES))) \
 		$(addprefix $(SIG_DIR), $(addsuffix .c, $(SIG_FILES))) \
  		$(addprefix $(ERROR_DIR), $(addsuffix .c, $(ERROR_FILES))) \
 		$(addprefix $(REDIR_DIR), $(addsuffix .c, $(REDIR_FILES))) \
+		$(addprefix $(GNL_DIR), $(addsuffix .c, $(GNL_FILES))) \
 
 OBJS =	$(addprefix $(SRCS_DIR), $(addsuffix .o, $(FILES))) \
  		$(addprefix $(LEXING_DIR), $(addsuffix .o, $(LEXING_FILES))) \
@@ -75,6 +83,7 @@ OBJS =	$(addprefix $(SRCS_DIR), $(addsuffix .o, $(FILES))) \
 		$(addprefix $(SIG_DIR), $(addsuffix .o, $(SIG_FILES))) \
  		$(addprefix $(ERROR_DIR), $(addsuffix .o, $(ERROR_FILES))) \
 		$(addprefix $(REDIR_DIR), $(addsuffix .o, $(REDIR_FILES))) \
+		$(addprefix $(GNL_DIR), $(addsuffix .o, $(GNL_FILES))) \
 
 .c.o: $(SRCS)
 	$(CC) $(CFLAGS) -c -o $@ $<

@@ -8,6 +8,8 @@
 # define READ 0
 # define CHILD 0
 
+# include "libft/libft.h"
+# include "gnl/get_next_line.h"
 # include <unistd.h>
 # include <stdio.h>
 # include <signal.h>
@@ -15,7 +17,6 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <sys/wait.h>
-# include "libft/libft.h"
 # include <readline/readline.h>
 # include <readline/history.h>
 # include <stdlib.h>
@@ -136,8 +137,9 @@ void		redir_anal(t_tklist **head, t_cmd **ret, int *i);
 int			left_redirection(t_cmd **ret, t_tklist ***head);
 int			right_redirection(t_cmd **ret, t_tklist ***head);
 int			append(t_cmd **ret, t_tklist ***head);
+int			here_doc(t_cmd **ret, t_tklist ***head);
 t_tklist 	*suppr_quotes(t_data *data);
 t_tklist 	*join_litt(t_data *data);
-
+void		query_user(char *limiter, int *buf_fd);
 t_tklist	*redir_scan(t_data *data);
 #endif
