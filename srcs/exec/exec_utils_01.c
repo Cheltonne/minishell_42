@@ -6,7 +6,7 @@
 /*   By: paslan <paslan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 16:56:07 by phaslan           #+#    #+#             */
-/*   Updated: 2022/05/16 16:58:45 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/16 17:46:08 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,8 +24,7 @@ t_cmd	*cmd_builder(t_tklist **head)
 		return (NULL);
 	ret->in = 0;
 	ret->out = 1;
-	while ((*head)->type != END && (*head)->type != PIPE)
-		cmd_builder_norm(head, &ret, &i);
+	cmd_builder_norm(head, &ret, &i);
 	ret->cmd[i] = NULL;
 	return (ret);
 }

@@ -6,7 +6,7 @@
 /*   By: chajax <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 17:40:59 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/16 16:48:36 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/16 18:17:58 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,24 +20,20 @@ void	cmd_builder_norm(t_tklist **head, t_cmd **ret, int *i)
 				(*head)->type == L_REDIR || (*head)->type == R_REDIR)
 		{
 			if ((*head)->type == LITTERAL)
-				(*ret)->cmd[(*i++)] = ft_strdup((*head)->value);
+			{
+				(*ret)->cmd[(*i)] = ft_strdup((*head)->value);
+				(*i) += 1;
+			}
 			redir_anal(head, ret, i);
 			if ((*head)->type != END)
 				(*head) = (*head)->next;
 		}
-		if (is_end(head) == TRUE)
+		if ((*head)->type != END)
+		{
+			(*head) = (*head)->next;
 			break ;
+		}
 	}
-}
-
-int	is_end(t_tklist **head)
-{
-	if ((*head)->type != END)
-	{
-		(*head) = (*head)->next;
-		return (FALSE);
-	}
-	return (TRUE);
 }
 
 void	pipe_finder(t_tklist **i)

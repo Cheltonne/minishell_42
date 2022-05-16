@@ -88,7 +88,6 @@ int			sp_char_nb(t_tklist *tokens, t_type type);
 t_tklist	*second_scan(t_data *data);
 t_cmd		*cmd_builder(t_tklist **head);
 void		cmd_builder_norm(t_tklist **head, t_cmd **ret, int *i);
-int			is_end(t_tklist **head);
 int			ft_table_count(char **file);
 int			clean_all(char **paths, char **cmdarg, char *final);
 char		*search_path(char **paths, char *cmdarg);
