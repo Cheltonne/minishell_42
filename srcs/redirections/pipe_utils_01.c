@@ -6,7 +6,7 @@
 /*   By: chajax <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 20:47:47 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/16 15:28:49 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/16 15:45:29 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,41 +65,5 @@ int	fork_pipes (int n, t_data *data)
 	}
 	spawn_proc(in, data->cmds[i]->out, data, data->cmds[i]->cmd);
 	close(fd[0]);
-	return (SUCCESS);
-}
-
-int	left_redirection(t_cmd **ret, t_tklist ***head)
-{
-	while ((**head)->type != END && (**head)->type != LITTERAL)
-		**head = (**head)->next;
-	if ((**head)->type != END)
-	{
-		(*ret)->in = open((**head)->value, O_RDONLY);
-		if ((*ret)->in < 0)
-		{
-			ft_putstr_fd((**head)->value, 2);
-			ft_putstr_fd(": No such file or directory\n", 2);
-			return (FAILURE);
-		}
-		**head = (**head)->next;
-	}
-	return (SUCCESS);
-}
-
-int	right_redirection(t_cmd **ret, t_tklist ***head)
-{
-	while ((**head)->type != END && (**head)->type != LITTERAL)
-		**head = (**head)->next;
-	if ((**head)->type != END)
-	{
-		(*ret)->out = open((**head)->value, O_CREAT | O_RDWR | O_TRUNC, 0644);
-		if ((*ret)->out < 0)
-		{
-			ft_putstr_fd((**head)->value, 2);
-			ft_putstr_fd(": No such file or directory\n", 2);
-			return (FAILURE);
-		}
-		**head = (**head)->next;
-	}
 	return (SUCCESS);
 }

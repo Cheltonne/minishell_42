@@ -31,6 +31,7 @@ UTILS_FILES = utils_01 \
 ERROR_FILES = error_handling \
 
 REDIR_FILES = pipe_utils_01 \
+			  redirection_fcts \
 
 SIG_FILES = signal \
 

@@ -6,7 +6,7 @@
 /*   By: paslan <paslan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 16:56:07 by phaslan           #+#    #+#             */
-/*   Updated: 2022/05/15 16:14:23 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/16 16:58:45 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,48 +16,16 @@ t_cmd	*cmd_builder(t_tklist **head)
 {
 	int			i;
 	t_cmd		*ret;
-	int			tklst_size;
 
 	i = 0;
-	tklst_size = ft_tklstsize(*head);
 	ret = ft_calloc(1, sizeof(t_cmd));
-	ret->cmd = ft_calloc(tklst_size, sizeof(char *));
+	ret->cmd = ft_calloc(ft_tklstsize(*head), sizeof(char *));
 	if (!ret)
 		return (NULL);
 	ret->in = 0;
 	ret->out = 1;
 	while ((*head)->type != END && (*head)->type != PIPE)
-	{
-		while ((*head)->type == LITTERAL || (*head)->type == WHITESPACE || (*head)->type == L_REDIR || (*head)->type == R_REDIR)
-		{
-			if ((*head)->type == LITTERAL)
-			{
-				ret->cmd[i] = ft_strdup((*head)->value);
-				i++;
-			}
-			if ((*head)->type == L_REDIR)
-			{
-				if (left_redirection(&ret, &head))
-					continue;
-				else
-					ret->cmd[i++] = NULL;
-			}
-			if ((*head)->type == R_REDIR)
-			{
-				if (right_redirection(&ret, &head))
-					continue;
-				else
-					ret->cmd[i++] = NULL;
-			}
-			if ((*head)->type != END)
-				(*head) = (*head)->next;
-		}
-		if ((*head)->type != END)
-		{
-			(*head) = (*head)->next;
-			break ;
-		}
-	}
+		cmd_builder_norm(head, &ret, &i);
 	ret->cmd[i] = NULL;
 	return (ret);
 }
