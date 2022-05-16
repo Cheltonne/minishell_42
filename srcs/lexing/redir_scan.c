@@ -6,7 +6,7 @@
 /*   By: paslan <paslan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 15:40:45 by phaslan           #+#    #+#             */
-/*   Updated: 2022/05/16 18:44:22 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/16 21:38:52 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ int arrow_analyse(t_tklist *data)
         }
         if (tk->type != LITTERAL)
         {
-            ft_putstr_fd("bash:parse error near token >\n'", 2);
+            ft_putstr_fd("bash:parse error near token '>\n'", 2);
             return (2);
         }
     }
