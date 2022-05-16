@@ -6,7 +6,7 @@
 /*   By: paslan <paslan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 20:04:10 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/15 16:33:54 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/16 18:35:57 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,6 +58,9 @@ int	handle_input(t_data *data, char **envp)
 	add_history(data->line);
 	if (set_data(data, envp) == FAILURE)
 		return (FAILURE);
+	data->token_list = redir_scan(data);
+	if (data->token_list == NULL)
+		return (SUCCESS);
 	while (i < data->pipe_nb + 1)
 		data->cmds[i++] = cmd_builder(&data->token_list);
 	if (data->cmds == NULL)

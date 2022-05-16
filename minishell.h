@@ -139,4 +139,5 @@ int			append(t_cmd **ret, t_tklist ***head);
 t_tklist 	*suppr_quotes(t_data *data);
 t_tklist 	*join_litt(t_data *data);
 
+t_tklist	*redir_scan(t_data *data);
 #endif
