@@ -12,6 +12,7 @@ LEXING_FILES =	lexer \
 				quotes \
 				env \
 				expand \
+				redir_scan \
 
 EXEC_FILES = exec_utils_01 \
 			 exec_utils_02 \
