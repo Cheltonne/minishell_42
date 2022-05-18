@@ -6,13 +6,11 @@
 /*   By: paslan <paslan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 15:40:45 by phaslan           #+#    #+#             */
-/*   Updated: 2022/05/16 16:49:51 by paslan           ###   ########.fr       */
+/*   Updated: 2022/05/18 19:19:45 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-
-int g_exit;
 
 // tant que je trouve pas de fleche, j'incremente
 // si je trouve une fleche, je vais aller check si c un simple ou double
