@@ -6,13 +6,13 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 17:33:11 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/15 16:25:24 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/18 20:01:29 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-t_token *token_builder(enum e_type type, char *value)
+t_token	*token_builder(enum e_type type, char *value)
 {
 	t_token	*ret;
 
@@ -31,24 +31,24 @@ t_token	*char_anal(char c)
 	ft_memset(value, c, 1);
 	ft_memset(value + 1, 0, 1);
 	if (c == '\'')
-		return(token_builder(S_QUOTE, value));
+		returni (token_builder(S_QUOTE, value));
 	else if (c == '\"')
-		return(token_builder(D_QUOTE, value));
+		return (token_builder(D_QUOTE, value));
 	else if (c == '<')
-		return(token_builder(L_REDIR, value));
+		return (token_builder(L_REDIR, value));
 	else if (c == '>')
-		return(token_builder(R_REDIR, value));
+		return (token_builder(R_REDIR, value));
 	else if (c == '|')
-		return(token_builder(PIPE, value));
+		return (token_builder(PIPE, value));
 	else if (c == '$')
-		return(token_builder(DOLLAR, value));
+		return (token_builder(DOLLAR, value));
 	else if (c == ' ')
 		return (token_builder(WHITESPACE, value));
 	else
-		return(token_builder(LITTERAL, value));
+		return (token_builder(LITTERAL, value));
 }
 
-t_tklist *f_token_builder(t_token **tokens, int tokens_len)
+t_tklist	*f_token_builder(t_token **tokens, int tokens_len)
 {
 	int			i;
 	int			o;
@@ -76,8 +76,6 @@ t_tklist *f_token_builder(t_token **tokens, int tokens_len)
 	}
 	ft_tklstadd_back(&ret, ft_tklstnew(END, NULL));
 	free(tokens);
-//	for (t_tklist *cpy = ret ; cpy->type != END;cpy = cpy->next)
-//		printf("f_token_builder says : [%s]\n", cpy->value);
 	return (ret);
 }
 
@@ -98,7 +96,5 @@ t_tklist	*lexer(char *line)
 		y++;
 		i++;
 	}
-//	for (i = 0; i < ft_strlen(line); i++)
-//		printf("'%s'\n", token[i]->value);
-	return(f_token_builder(token, ft_strlen(line)));
+	return (f_token_builder(token, ft_strlen(line)));
 }

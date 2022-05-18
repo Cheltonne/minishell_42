@@ -6,7 +6,7 @@
 /*   By: chajax <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 17:40:59 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/16 19:10:02 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/18 19:59:01 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,9 +16,9 @@ void	cmd_builder_norm(t_tklist **head, t_cmd **ret, int *i)
 {
 	while ((*head)->type != END && (*head)->type != PIPE)
 	{
-		while ((*head)->type == LITTERAL || (*head)->type == WHITESPACE || 
-				(*head)->type == L_REDIR || (*head)->type == R_REDIR ||
-				(*head)->type == APPEND || (*head)->type == HERE_DOC)
+		while ((*head)->type == LITTERAL || (*head)->type == WHITESPACE
+			|| (*head)->type == L_REDIR || (*head)->type == R_REDIR
+			|| (*head)->type == APPEND || (*head)->type == HERE_DOC)
 		{
 			if ((*head)->type == LITTERAL)
 			{
@@ -45,7 +45,7 @@ void	pipe_finder(t_tklist **i)
 
 int	pipe_count(char *str)
 {
-	int i;
+	int	i;
 	int	ret;
 
 	i = 0;

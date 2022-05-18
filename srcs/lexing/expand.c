@@ -6,7 +6,7 @@
 /*   By: paslan <paslan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 16:27:02 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/11 17:40:36 by paslan           ###   ########.fr       */
+/*   Updated: 2022/05/18 20:02:41 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,15 @@ void	expanding(t_data *data, t_tklist *tk)
 		tk->next->value = ft_itoa(g_exit);
 	else
 	{
-	tk->next->value = get_venv(data->env, tk->next->value);
-	if (tk->next->value == NULL)
-		tk->next->value = ft_strdup("");
+		tk->next->value = get_venv(data->env, tk->next->value);
+		if (tk->next->value == NULL)
+			tk->next->value = ft_strdup("");
 	}
-//	tk = tk->next;
-//	del_tknode(tk->prev);
 }
 
 void	expand(t_data *data)
 {
-	t_tklist *tk;
+	t_tklist	*tk;
 
 	tk = data->token_list;
 	while (tk->type != END)
@@ -59,10 +57,7 @@ void	expand(t_data *data)
 		{
 			if (tk->next->type == LITTERAL)
 			{
-			expanding(data, tk);
-			//	tk->next->value = get_venv(data->env, tk->next->value);
-			//	if (tk->next->value == NULL)
-			//		tk->next->value = ft_strdup("");
+				expanding(data, tk);
 			tk = tk->next;
 			del_tknode(tk->prev);
 				// ici c pas bon, je dois check toute la string jusqu'a 

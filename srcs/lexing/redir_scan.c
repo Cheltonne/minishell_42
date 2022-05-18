@@ -6,7 +6,7 @@
 /*   By: paslan <paslan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 15:40:45 by phaslan           #+#    #+#             */
-/*   Updated: 2022/05/16 21:38:52 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/18 20:12:18 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,16 +25,16 @@
 // si jamais 
 // jpeux pas utiliser exit, va falloir que je fasse attention a comment sortir de mes fonctions
 
-t_tklist *arrow_ncheck(t_tklist *tk)
+t_tklist	*arrow_ncheck(t_tklist *tk)
 {
-    while (tk->type != END)
+	while (tk->type != END)
 	{
 		if (tk->type == R_REDIR || tk->type == L_REDIR)
 		{
-            if (ft_strlen(tk->value) > 2)
-            {
-                g_exit = 2;
-                if (tk->type == R_REDIR)
+			if (ft_strlen(tk->value) > 2)
+			{
+				g_exit = 2;
+				if (tk->type == R_REDIR)
                     ft_putstr_fd("bash:syntax error near token '>>'\n", 2);
                 if (tk->type == L_REDIR)
                     ft_putstr_fd("bash:syntax error near token '<<'\n", 2);
