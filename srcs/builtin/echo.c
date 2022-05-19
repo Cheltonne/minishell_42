@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 17:05:50 by phaslan           #+#    #+#             */
-/*   Updated: 2022/05/19 18:03:03 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/19 21:32:37 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	check_opt(char *args)
 	return (0);
 }
 
-int	echo_cmd(char **args)
+int	echo_cmd(char **args, t_data *data)
 {
 	int	i;
 	int	option;
@@ -36,7 +36,7 @@ int	echo_cmd(char **args)
 	option = 0;
 	if (!args[1])
 	{
-		ft_putstr_fd("\n", 1);
+		ft_putstr_fd("\n", data->cmds[0]->out);
 		return (0);
 	}
 	if (check_opt(args[1]) && !args[2])
@@ -45,12 +45,12 @@ int	echo_cmd(char **args)
 		option++;
 	while (args[i])
 	{
-		ft_putstr_fd(args[i], 1);
+		ft_putstr_fd(args[i], data->cmds[0]->out);
 		i++;
 		if (args[i])
-			ft_putstr_fd(" ", 1);
+			ft_putstr_fd(" ", data->cmds[0]->out);
 	}
 	if (!option)
-		ft_putstr_fd("\n", 1);
+		ft_putstr_fd("\n", data->cmds[0]->out);
 	return (0);
 }

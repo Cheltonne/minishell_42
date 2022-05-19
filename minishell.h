@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 22:26:27 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/19 16:54:44 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/19 21:39:50 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,8 +134,8 @@ int			env_cmd(t_data *data);
 int			cd_cmd(t_data *data, char **args);
 int			exec_builtin(t_data *data, char **cmd);
 int			is_builtin(char **cmd);
-int			echo_cmd(char **args);
-int			try_pwd(void);
+int			echo_cmd(char **args, t_data *data);
+int			try_pwd(t_data *data);
 char		*set_name(char *envp);
 char		*set_value(char *envp);
 int			not_valid_env_arg(char *arg);
