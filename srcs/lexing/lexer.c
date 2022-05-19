@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 17:33:11 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/18 20:01:29 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/19 12:46:28 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_token	*char_anal(char c)
 	ft_memset(value, c, 1);
 	ft_memset(value + 1, 0, 1);
 	if (c == '\'')
-		returni (token_builder(S_QUOTE, value));
+		return (token_builder(S_QUOTE, value));
 	else if (c == '\"')
 		return (token_builder(D_QUOTE, value));
 	else if (c == '<')
