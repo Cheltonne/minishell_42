@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 14:55:24 by phaslan           #+#    #+#             */
-/*   Updated: 2022/04/21 16:24:49 by phaslan          ###   ########.fr       */
+/*   Updated: 2022/05/19 14:10:09 by phaslan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void	env_export(t_data *data)
 {	
 	t_envlist	*copy;
-	char *name;
+	char		*name;
 
 	copy = data->env;
 	while (copy)
@@ -34,7 +34,6 @@ void	env_export(t_data *data)
 	}
 	free(name);
 }
-
 
 int	env_rp_value(char *name, t_envlist *env, char *value)
 {
@@ -57,7 +56,7 @@ int	env_rp_value(char *name, t_envlist *env, char *value)
 char	*get_venv(t_envlist *env, char *name)
 {
 	t_envlist	*current;
-	char *nameu;
+	char		*nameu;
 
 	current = env;
 	while (current->name != NULL)
@@ -74,14 +73,11 @@ char	*get_venv(t_envlist *env, char *name)
 	return (NULL);
 }
 
-// deux prb je vais pas a la fin de export salut12 salut13 salut14
-// alors que dans ce cas le dernier devrait [etre bon]
-
-int   export_cmd(t_data *data, char **cmd)
+int	export_cmd(t_data *data, char **cmd)
 {
-	char	*name;
-	char	*value;
-	int		i;
+	char		*name;
+	char		*value;
+	int			i;
 	t_envlist	*lst;
 
 	name = NULL;
@@ -95,7 +91,6 @@ int   export_cmd(t_data *data, char **cmd)
 		name = set_name(cmd[i]);
 		if (!name)
 			return (1);
-		// printf("%s", name);
 		if (not_valid_env_arg(name))
 		{
 			ft_putstr_fd("export : not a correct identifier\n", 2);
@@ -104,9 +99,6 @@ int   export_cmd(t_data *data, char **cmd)
 		value = set_value(cmd[i]);
 		if (!value)
 			value = ft_strdup("");
-		// check le cas mdr=== d'ailleurs
-		// jcrois t'as le droit qu'a un = et rien d'autres ? jpige pas
-		// printf("jsuis la\n");
 		if (get_venv(data->env, name))
 			env_rp_value(name, data->env, value);
 		else

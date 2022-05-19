@@ -3,14 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   exec_utils_02.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chajax <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 17:40:59 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/15 16:15:48 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/19 14:10:21 by phaslan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
+
+void	cmd_builder_norm(t_tklist **head, t_cmd **ret, int *i)
+{
+	while ((*head)->type != END && (*head)->type != PIPE)
+	{
+		while ((*head)->type == LITTERAL || (*head)->type == WHITESPACE
+			|| (*head)->type == L_REDIR || (*head)->type == R_REDIR
+			|| (*head)->type == APPEND || (*head)->type == HERE_DOC)
+		{
+			if ((*head)->type == LITTERAL)
+			{
+				(*ret)->cmd[(*i)] = ft_strdup((*head)->value);
+				(*i) += 1;
+			}
+			redir_anal(head, ret, i);
+			if ((*head)->type != END)
+				(*head) = (*head)->next;
+		}
+		if ((*head)->type != END)
+		{
+			(*head) = (*head)->next;
+			break ;
+		}
+	}
+}
 
 void	pipe_finder(t_tklist **i)
 {
@@ -20,7 +45,7 @@ void	pipe_finder(t_tklist **i)
 
 int	pipe_count(char *str)
 {
-	int i;
+	int	i;
 	int	ret;
 
 	i = 0;

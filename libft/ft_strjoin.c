@@ -6,13 +6,13 @@
 /*   By: chajax <chajax@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 14:23:41 by chajax            #+#    #+#             */
-/*   Updated: 2021/06/26 18:43:53 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/16 21:04:49 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(char const *s1, char const *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	int		i;
 	int		o;

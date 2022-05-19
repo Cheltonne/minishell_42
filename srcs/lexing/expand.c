@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paslan <paslan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 16:27:02 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/11 17:40:36 by paslan           ###   ########.fr       */
+/*   Updated: 2022/05/19 14:10:52 by phaslan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,17 +40,15 @@ void	expanding(t_data *data, t_tklist *tk)
 		tk->next->value = ft_itoa(g_exit);
 	else
 	{
-	tk->next->value = get_venv(data->env, tk->next->value);
-	if (tk->next->value == NULL)
-		tk->next->value = ft_strdup("");
+		tk->next->value = get_venv(data->env, tk->next->value);
+		if (tk->next->value == NULL)
+			tk->next->value = ft_strdup("");
 	}
-//	tk = tk->next;
-//	del_tknode(tk->prev);
 }
 
 void	expand(t_data *data)
 {
-	t_tklist *tk;
+	t_tklist	*tk;
 
 	tk = data->token_list;
 	while (tk->type != END)
@@ -59,36 +57,11 @@ void	expand(t_data *data)
 		{
 			if (tk->next->type == LITTERAL)
 			{
-			expanding(data, tk);
-			//	tk->next->value = get_venv(data->env, tk->next->value);
-			//	if (tk->next->value == NULL)
-			//		tk->next->value = ft_strdup("");
-			tk = tk->next;
-			del_tknode(tk->prev);
-				// ici c pas bon, je dois check toute la string jusqu'a 
-				// tomber sur un char invalide
-				// je check si la string up until non-valid est dans mon env
-				// si oui, je vais dump ca
-
-				// il me faut un cas special pour l'expand du g_exit
-				// je vais check si jamais le litt suivant c un ?
-				// si oui je vais aller itoa la valeur de g_exit into le maillon
-				// je rends l'apparail au checkeur d'expand
-				// autant faire tout ca dans une fonction, le cas special avec ?
-				// je vais la nommer expansions_expanded
-/*				if (tk->prev)
-				{
-					if (tk->prev->type == LITTERAL)
-					{
-						tk->next->value = ft_strjoin(tk->prev->value, tk->next->value);
-						del_tknode(tk->prev);
-						tk = tk->next;
-					}
-				} */
+				expanding(data, tk);
+				tk = tk->next;
+				del_tknode(tk->prev);
 			}
 		}
-		//if (tk->type != END)
-		//	printf("%s test %d type\n", tk->value, tk->type);
 		if (tk->type != END)
 			tk = tk->next;
 	}
