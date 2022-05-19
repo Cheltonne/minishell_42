@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 17:06:33 by phaslan           #+#    #+#             */
-/*   Updated: 2022/05/19 16:54:18 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/19 21:40:23 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,9 +54,9 @@ int	exec_builtin(t_data *data, char **cmd)
 	if (!ft_strcmp(cmd[0], "cd"))
 		return (cd_cmd(data, cmd));
 	if (!ft_strcmp(cmd[0], "pwd"))
-		return (try_pwd());
+		return (try_pwd(data));
 	if (!ft_strcmp(cmd[0], "echo"))
-		return (echo_cmd(cmd));
+		return (echo_cmd(cmd, data));
 	if (!ft_strcmp(cmd[0], "unset"))
 		return (unset_cmd(data, cmd));
 	if (!ft_strcmp(cmd[0], "env"))
