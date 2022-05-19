@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 12:31:21 by phaslan           #+#    #+#             */
-/*   Updated: 2022/04/19 15:49:48 by phaslan          ###   ########.fr       */
+/*   Updated: 2022/05/19 14:09:42 by phaslan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ t_envlist	*unset_env(t_envlist *env, char *arg)
 // j'arrive pas a en unset plusieurs d'un coup ??
 // pk j'ai pas reussi a unset 2 trucs d'un coup
 // j'arrive a unset plusieurs trucs
-// j'arrive pas a unset un truc en particulier, en rapport avec la position dans la liste chaine, mais quoi
+// j'arrive pas a unset un truc en particulier,
 // dans le cas ou j'ai salut331 et salut3 se vais unset salut3
 
 int	unset_cmd(t_data *data, char **argv)
@@ -69,13 +69,10 @@ int	unset_cmd(t_data *data, char **argv)
 			break ;
 		if (data->env)
 		{
-
 			data->env = unset_env(data->env, argv[i]);
 		}
 		i++;
 	}
 	data->env_arr = dupenv(data->env);
-	// free array 2d de env
-	// redup l'env en 2d
 	return (0);
 }

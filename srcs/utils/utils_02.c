@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_02.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chajax <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 21:53:10 by chajax            #+#    #+#             */
-/*   Updated: 2022/04/10 21:56:26 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/19 14:20:37 by phaslan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,6 @@ t_envlist	*ft_envlstnew(char *name, char *value)
 	elem->prev = NULL;
 	return (elem);
 }
-
 
 t_tklist	*ft_tklstnew(t_type type, char *value)
 {
@@ -78,4 +77,3 @@ void	ft_tklstadd_back(t_tklist **alst, t_tklist *new)
 	last->next = new;
 	new->prev = last;
 }
-
