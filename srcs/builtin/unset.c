@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 12:31:21 by phaslan           #+#    #+#             */
-/*   Updated: 2022/05/19 14:09:42 by phaslan          ###   ########.fr       */
+/*   Updated: 2022/05/19 21:53:58 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,22 @@
 
 // d'ailleurs remplace celui dans quote.c par ca
 
-int	not_valid_env_arg(char *arg)
+int	not_valid_env_arg(char *arg, int x)
 {
 	int	i;
 
 	i = 1;
 	if (!ft_isalpha(arg[0]))
+	{
+		ft_putstr_fd("not a correct env identifier\n", 2);
 		return (1);
+	}
 	while (arg[i])
 	{
 		if (!ft_isalpha(arg[i]) && !ft_isdigit(arg[i]) && arg[i] != '_')
 		{
-			printf("je crash a ce %c", arg[i]);
+			if (x == 3)
+				ft_putstr_fd("not a correct env identifier\n", 2);
 			return (1);
 		}
 		i++;
@@ -63,7 +67,7 @@ int	unset_cmd(t_data *data, char **argv)
 	i = 1;
 	while (argv[i])
 	{
-		while (argv[i] && not_valid_env_arg(argv[i]))
+		while (argv[i] && not_valid_env_arg(argv[i], 0))
 			i++;
 		if (!argv[i])
 			break ;
