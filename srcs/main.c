@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 20:04:10 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/19 16:15:42 by phaslan          ###   ########.fr       */
+/*   Updated: 2022/05/19 19:20:01 by phaslan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,7 +92,7 @@ int	main(int argc, char **argv, char **envp)
 	(void)argv;
 	if (argc != 1)
 		exit_error("minishell does not accept any arguments 😰😱😨😰😥😓\n");
-	setup_signal();
+	// setup_signal();
 	data = ft_calloc(sizeof(t_data), 1);
 	if (!data)
 		return (1);
@@ -101,6 +101,7 @@ int	main(int argc, char **argv, char **envp)
 	g_exit = 0;
 	while (1)
 	{
+		setup_signal();
 		data->line = readline("jcrois jsuis amsomniaque o_O >");
 		if (data->line && *data->line != '\0' && only_whitespaces(data->line) == FALSE)
 		{
