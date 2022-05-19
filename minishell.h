@@ -154,4 +154,7 @@ t_tklist	*suppr_quotes(t_data *data);
 t_tklist	*join_litt(t_data *data);
 void		query_user(char *limiter, int *buf_fd);
 t_tklist	*redir_scan(t_data *data);
+t_tklist 	*suppr_quotes(t_data *data);
+t_tklist 	*join_litt(t_data *data);
+
 #endif
