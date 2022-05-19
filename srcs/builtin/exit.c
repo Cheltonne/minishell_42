@@ -6,7 +6,7 @@
 /*   By: paslan <paslan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 14:38:38 by phaslan           #+#    #+#             */
-/*   Updated: 2022/05/17 18:21:53 by paslan           ###   ########.fr       */
+/*   Updated: 2022/05/19 18:10:01 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,8 +95,6 @@ int exit_cmd(t_data *data, char **args)
     // ouais je dois juste pas quitter le truc en entier SI exit est après une pipe
     
     // si jamais il y a trop d'arguments (2) je ferme
-    if (data->id != 0)
-        ft_putstr_fd("exit\n", 2);
     if (args[1] && args[2])
     {
         ft_putstr_fd("exit:too many arguments", 2);
@@ -112,7 +110,8 @@ int exit_cmd(t_data *data, char **args)
         clear_history();
         free_env(data->env);
         free_tokens(data->token_list);
-        ft_putstr_fd("exit", 2);
+		if (data->id != 0)
+        	ft_putstr_fd("exit\n", 2);
         if (args[1] != NULL)
 			g_exit = ft_strdigit(args[1]);
 		ft_chartable_free(data->env_arr);

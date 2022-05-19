@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 17:40:59 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/19 17:45:45 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/19 19:13:11 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,11 @@ int	pipe_count(t_tklist *token_list)
 
 void	exec_single_cmd(t_data *data)
 {
+	if (data->cmds[0]->in != 0 || data->cmds[0]->out != 1)
+	{
+		dup2(data->cmds[0]->in, STDIN_FILENO);
+		dup2(data->cmds[0]->out, STDOUT_FILENO);
+	}
 	if (is_builtin(data->cmds[0]->cmd))
 	{
 		g_exit = exec_builtin(data, data->cmds[0]->cmd);
@@ -62,13 +67,5 @@ void	exec_single_cmd(t_data *data)
 	}
 	fork_wrapper(&data->id);
 	if (data->id == 0)
-	{
-		if (data->cmds[0]->in != 0 || data->cmds[0]->out != 1)
-		{
-			dup2(data->cmds[0]->in, STDIN_FILENO);
-			dup2(data->cmds[0]->out, STDOUT_FILENO);
-		}
-		else
-			execute(data->cmds[0]->cmd, data->env_arr);
-	}
+		execute(data->cmds[0]->cmd, data->env_arr);
 }
