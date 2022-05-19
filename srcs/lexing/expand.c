@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   expand.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paslan <paslan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 16:27:02 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/18 20:02:41 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/19 14:10:52 by phaslan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,32 +58,10 @@ void	expand(t_data *data)
 			if (tk->next->type == LITTERAL)
 			{
 				expanding(data, tk);
-			tk = tk->next;
-			del_tknode(tk->prev);
-				// ici c pas bon, je dois check toute la string jusqu'a 
-				// tomber sur un char invalide
-				// je check si la string up until non-valid est dans mon env
-				// si oui, je vais dump ca
-
-				// il me faut un cas special pour l'expand du g_exit
-				// je vais check si jamais le litt suivant c un ?
-				// si oui je vais aller itoa la valeur de g_exit into le maillon
-				// je rends l'apparail au checkeur d'expand
-				// autant faire tout ca dans une fonction, le cas special avec ?
-				// je vais la nommer expansions_expanded
-/*				if (tk->prev)
-				{
-					if (tk->prev->type == LITTERAL)
-					{
-						tk->next->value = ft_strjoin(tk->prev->value, tk->next->value);
-						del_tknode(tk->prev);
-						tk = tk->next;
-					}
-				} */
+				tk = tk->next;
+				del_tknode(tk->prev);
 			}
 		}
-		//if (tk->type != END)
-		//	printf("%s test %d type\n", tk->value, tk->type);
 		if (tk->type != END)
 			tk = tk->next;
 	}

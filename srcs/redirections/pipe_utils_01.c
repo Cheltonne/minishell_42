@@ -3,10 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   pipe_utils_01.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: chajax <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 20:47:47 by chajax            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/05/19 13:52:01 by chajax           ###   ########.fr       */
+=======
+/*   Updated: 2022/05/19 14:18:34 by phaslan          ###   ########.fr       */
+>>>>>>> 8fa15a0f351dde3fa8deeac80c58849482ba4ccd
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,30 +23,35 @@ void	fork_wrapper(pid_t *child)
 		(perror("Fork"));
 }
 
-int spawn_proc (int in, int out, t_data *data, char **cmd)
+int	spawn_proc(int in, int out, t_data *data, char **cmd)
 {
 	fork_wrapper(&data->id);
 	if (data->id == CHILD)
 	{
 		if (in != STDIN_FILENO)
-        {
-        	dup2(in, STDIN_FILENO);
-        	close(in);
-        }
-    	if (out != STDOUT_FILENO)
-        {
-        	dup2(out, STDOUT_FILENO);
-        	close(out);
-        }
+		{
+			dup2(in, STDIN_FILENO);
+			close(in);
+		}
+		if (out != STDOUT_FILENO)
+		{
+			dup2(out, STDOUT_FILENO);
+			close(out);
+		}
 		execute(cmd, data->env_arr);
+<<<<<<< HEAD
     }
 	return (SUCCESS);
+=======
+	}
+	return (data->id);
+>>>>>>> 8fa15a0f351dde3fa8deeac80c58849482ba4ccd
 }
 
-int	fork_pipes (int n, t_data *data)
+int	fork_pipes(int n, t_data *data)
 {
-	int i;
-	int in;
+	int	i;
+	int	in;
 	int	out;
 	int	fd[2];
 

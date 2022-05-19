@@ -6,13 +6,13 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 18:43:52 by phaslan           #+#    #+#             */
-/*   Updated: 2022/04/19 18:53:35 by phaslan          ###   ########.fr       */
+/*   Updated: 2022/05/19 14:17:35 by phaslan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_tklist *suppr_quotes(t_data *data)
+t_tklist	*suppr_quotes(t_data *data)
 {
 	t_tklist	*tk;
 

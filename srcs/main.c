@@ -3,20 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: paslan <paslan@student.42.fr>              +#+  +:+       +#+        */
+/*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 20:04:10 by chajax            #+#    #+#             */
+<<<<<<< HEAD
 /*   Updated: 2022/05/19 14:12:00 by chajax           ###   ########.fr       */
+=======
+/*   Updated: 2022/05/19 14:21:16 by phaslan          ###   ########.fr       */
+>>>>>>> 8fa15a0f351dde3fa8deeac80c58849482ba4ccd
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
-int g_exit;
+int	g_exit;
 
 int	only_whitespaces(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i] == ' ')
@@ -33,7 +37,7 @@ int	set_data(t_data *data, char **envp)
 	data->cmds = ft_calloc(sizeof(t_cmd), 1);
 	if (data->cmds == NULL)
 		return (FAILURE);
-	data->token_list = lexer(ft_strjoin(data->line, " ")); //free line; beware of double free
+	data->token_list = lexer(ft_strjoin(data->line, " "));
 	if (data->token_list == NULL)
 		return (FAILURE);
 	data->token_list = second_scan(data);
@@ -50,7 +54,7 @@ int	set_data(t_data *data, char **envp)
 
 int	handle_input(t_data *data, char **envp)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (ft_strncmp(data->line, "exit", 4) == 0)
@@ -75,7 +79,7 @@ int	handle_input(t_data *data, char **envp)
 		else
 		{
 			fork_pipes(data->pipe_nb + 1, data);
-			break;
+			break ;
 		}
 		i++;
 	}
@@ -85,7 +89,7 @@ int	handle_input(t_data *data, char **envp)
 	return (SUCCESS);
 }
 
-int main(int argc, char **argv, char **envp)
+int	main(int argc, char **argv, char **envp)
 {
 	t_data	*data;
 
