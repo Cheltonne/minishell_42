@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 20:47:47 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/19 17:33:08 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/19 22:42:25 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,15 +73,15 @@ int	fork_pipes(int n, t_data *data)
 			spawn_proc(io[0], data->cmds[i]->out, data, data->cmds[i]->cmd);
 		close(fd[1]);
 		if (data->cmds[i + 1]->in == STDIN_FILENO)
+		{
 			io[0] = fd[0];
+			close(fd[0]);
+		}
 		else
 			io[0] = data->cmds[i + 1]->in;
 		i++;
 	}
-	if (is_builtin(data->cmds[i]->cmd))
-		exec_builtin_pipe(data, data->cmds[i]->cmd);
-	else
-		spawn_proc(io[0], data->cmds[i]->out, data, data->cmds[i]->cmd);
+	spawn_proc(io[0], data->cmds[i]->out, data, data->cmds[i]->cmd);
 	close(fd[0]);
 	return (SUCCESS);
 }
