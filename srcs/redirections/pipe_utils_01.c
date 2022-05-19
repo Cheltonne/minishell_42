@@ -6,7 +6,7 @@
 /*   By: chajax <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 20:47:47 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/16 22:15:13 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/19 13:52:01 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int spawn_proc (int in, int out, t_data *data, char **cmd)
         }
 		execute(cmd, data->env_arr);
     }
-	return (data->id);
+	return (SUCCESS);
 }
 
 int	fork_pipes (int n, t_data *data)

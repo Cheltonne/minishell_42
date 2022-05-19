@@ -6,7 +6,7 @@
 /*   By: paslan <paslan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 20:04:10 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/16 19:03:34 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/19 14:12:00 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ int	only_whitespaces(char *str)
 int	set_data(t_data *data, char **envp)
 {
 	data->here_doc = 0;
-	data->pipe_nb = pipe_count(data->line);
 	data->cmds = ft_calloc(sizeof(t_cmd), 1);
 	if (data->cmds == NULL)
 		return (FAILURE);
@@ -44,6 +43,7 @@ int	set_data(t_data *data, char **envp)
 	data->token_list = join_litterals(data);
 	data->token_list = suppr_quotes(data);
 	data->token_list = join_litt(data);
+	data->pipe_nb = pipe_count(data->token_list);
 	return (SUCCESS);
 	(void)envp;
 }

@@ -6,7 +6,7 @@
 /*   By: chajax <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 17:40:59 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/18 19:59:01 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/19 14:15:21 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,24 +37,18 @@ void	cmd_builder_norm(t_tklist **head, t_cmd **ret, int *i)
 	}
 }
 
-void	pipe_finder(t_tklist **i)
+int	pipe_count(t_tklist *token_list)
 {
-	while ((*i)->type != END || (*i)->type != PIPE)
-		(*i) = (*i)->next;
-}
-
-int	pipe_count(char *str)
-{
-	int	i;
 	int	ret;
+	t_tklist *head;
 
-	i = 0;
 	ret = 0;
-	while (str[i])
+	head = token_list;
+	while (head->type != END)
 	{
-		if (str[i] == '|')
+		if (head->type == PIPE)
 			ret++;
-		i++;
+		head = head->next;
 	}
 	return (ret);
 }
