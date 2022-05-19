@@ -6,11 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 20:47:47 by chajax            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/05/19 13:52:01 by chajax           ###   ########.fr       */
-=======
-/*   Updated: 2022/05/19 14:18:34 by phaslan          ###   ########.fr       */
->>>>>>> 8fa15a0f351dde3fa8deeac80c58849482ba4ccd
+/*   Updated: 2022/05/19 17:19:35 by phaslan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,13 +35,8 @@ int	spawn_proc(int in, int out, t_data *data, char **cmd)
 			close(out);
 		}
 		execute(cmd, data->env_arr);
-<<<<<<< HEAD
-    }
-	return (SUCCESS);
-=======
 	}
-	return (data->id);
->>>>>>> 8fa15a0f351dde3fa8deeac80c58849482ba4ccd
+	return (SUCCESS);
 }
 
 int	fork_pipes(int n, t_data *data)

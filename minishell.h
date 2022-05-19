@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 22:26:27 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/19 14:24:55 by phaslan          ###   ########.fr       */
+/*   Updated: 2022/05/19 17:31:09 by phaslan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -138,7 +138,7 @@ int			echo_cmd(char **args);
 int			try_pwd(void);
 char		*set_name(char *envp);
 char		*set_value(char *envp);
-int			not_valid_env_arg(char *arg);
+int			not_valid_env_arg(char *arg, int x);
 int			ft_strcmp(const char *s1, const char *s2);
 char		*get_venv(t_envlist *env, char *name);
 int			fork_pipes(int n, t_data *data);
@@ -153,7 +153,7 @@ t_tklist	*suppr_quotes(t_data *data);
 t_tklist	*join_litt(t_data *data);
 void		query_user(char *limiter, int *buf_fd);
 t_tklist	*redir_scan(t_data *data);
-t_tklist 	*suppr_quotes(t_data *data);
-t_tklist 	*join_litt(t_data *data);
+t_tklist	*suppr_quotes(t_data *data);
+t_tklist	*join_litt(t_data *data);
 
 #endif

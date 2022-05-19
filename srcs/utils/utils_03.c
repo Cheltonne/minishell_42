@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 22:26:27 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/19 14:20:29 by phaslan          ###   ########.fr       */
+/*   Updated: 2022/05/19 17:31:09 by phaslan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,9 +71,7 @@ t_tklist	*join_litterals(t_data *data)
 		if (tk->type != END)
 			tk = tk->next;
 	}
-	while (tk->prev)
-		tk = tk->prev;
-	return (tk);
+	return (data->token_list);
 }
 
 t_tklist	*suppr_quotes(t_data *data)

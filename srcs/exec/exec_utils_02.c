@@ -6,11 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 17:40:59 by chajax            #+#    #+#             */
-<<<<<<< HEAD
-/*   Updated: 2022/05/19 14:15:21 by chajax           ###   ########.fr       */
-=======
-/*   Updated: 2022/05/19 14:10:21 by phaslan          ###   ########.fr       */
->>>>>>> 8fa15a0f351dde3fa8deeac80c58849482ba4ccd
+/*   Updated: 2022/05/19 17:19:29 by phaslan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +39,8 @@ void	cmd_builder_norm(t_tklist **head, t_cmd **ret, int *i)
 
 int	pipe_count(t_tklist *token_list)
 {
-	int	ret;
-	t_tklist *head;
+	int			ret;
+	t_tklist	*head;
 
 	ret = 0;
 	head = token_list;
