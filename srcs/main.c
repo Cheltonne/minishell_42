@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 20:04:10 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/19 16:06:54 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/19 16:55:19 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,8 +53,6 @@ int	handle_input(t_data *data, char **envp)
 	int	i;
 
 	i = 0;
-	if (ft_strncmp(data->line, "exit", 4) == 0)
-		exit(EXIT_SUCCESS);
 	add_history(data->line);
 	if (set_data(data, envp) == FAILURE)
 		return (FAILURE);
@@ -68,9 +66,7 @@ int	handle_input(t_data *data, char **envp)
 	i = 0;
 	while (i < data->pipe_nb + 1)
 	{
-		if (is_builtin(data->cmds[i]->cmd))
-			g_exit = exec_builtin(data, data->cmds[i]->cmd);
-		else if (data->pipe_nb == 0)
+		if (data->pipe_nb == 0)
 			exec_single_cmd(data);
 		else
 		{

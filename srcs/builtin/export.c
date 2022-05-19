@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 14:55:24 by phaslan           #+#    #+#             */
-/*   Updated: 2022/05/19 14:10:09 by phaslan          ###   ########.fr       */
+/*   Updated: 2022/05/19 17:05:03 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,5 +114,5 @@ int	export_cmd(t_data *data, char **cmd)
 	}
 	free(value);
 	free(name);
-	return (1);
+	return (SUCCESS);
 }

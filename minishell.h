@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 22:26:27 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/19 14:24:55 by phaslan          ###   ########.fr       */
+/*   Updated: 2022/05/19 16:54:44 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -155,5 +155,6 @@ void		query_user(char *limiter, int *buf_fd);
 t_tklist	*redir_scan(t_data *data);
 t_tklist 	*suppr_quotes(t_data *data);
 t_tklist 	*join_litt(t_data *data);
+int			exit_cmd(t_data *data, char **args) ;
 
 #endif
