@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 17:40:59 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/19 17:00:44 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/19 17:45:45 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,8 +56,10 @@ int	pipe_count(t_tklist *token_list)
 void	exec_single_cmd(t_data *data)
 {
 	if (is_builtin(data->cmds[0]->cmd))
+	{
 		g_exit = exec_builtin(data, data->cmds[0]->cmd);
-	return ;
+		return ;
+	}
 	fork_wrapper(&data->id);
 	if (data->id == 0)
 	{
