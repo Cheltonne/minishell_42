@@ -24,6 +24,7 @@ BUILTIN_FILES = cd \
 				env		\
 				export	\
 				unset	\
+				exit	\
 
 UTILS_FILES = utils_01 \
 			  utils_02 \

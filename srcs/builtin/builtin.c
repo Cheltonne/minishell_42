@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 17:06:33 by phaslan           #+#    #+#             */
-/*   Updated: 2022/05/19 13:48:15 by phaslan          ###   ########.fr       */
+/*   Updated: 2022/05/19 16:54:18 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ int	is_builtin(char **cmd)
 		return (1);
 	if (!ft_strcmp(cmd[0], "export"))
 		return (1);
+	if (!ft_strcmp(cmd[0], "exit"))
+		return (1);
 	return (0);
 }
 
@@ -61,5 +63,7 @@ int	exec_builtin(t_data *data, char **cmd)
 		return (env_cmd(data));
 	if (!ft_strcmp(cmd[0], "export"))
 		return (export_cmd(data, cmd));
+	if (!ft_strcmp(cmd[0], "exit"))
+		return (exit_cmd(data, cmd));
 	return (1);
 }

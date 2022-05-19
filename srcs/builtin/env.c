@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 14:38:38 by phaslan           #+#    #+#             */
-/*   Updated: 2022/05/19 14:09:47 by phaslan          ###   ########.fr       */
+/*   Updated: 2022/05/19 17:05:18 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ int	env_cmd(t_data *data)
 		while (copy->name != NULL)
 		{
 			name = ft_strjoin(copy->name, "=");
-			ft_putstr_fd(name, 2);
-			ft_putstr_fd(copy->value, 2);
-			ft_putstr_fd("\n", 2);
+			ft_putstr_fd(name, 1);
+			ft_putstr_fd(copy->value, 1);
+			ft_putstr_fd("\n", 1);
 			copy = copy->next;
 		}
 	}
 	free(name);
-	return (0);
+	return (SUCCESS);
 }
