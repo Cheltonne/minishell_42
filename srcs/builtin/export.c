@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 14:55:24 by phaslan           #+#    #+#             */
-/*   Updated: 2022/05/19 17:05:03 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/19 21:48:23 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,19 @@ char	*get_venv(t_envlist *env, char *name)
 	return (NULL);
 }
 
+void	node_add(t_envlist *lst, char *name, char *value, t_data *data)
+{
+	if (get_venv(data->env, name))
+		env_rp_value(name, data->env, value);
+	else
+	{
+		lst = ft_envlstlast(lst);
+		lst->name = ft_strdup(name);
+		lst->value = ft_strdup(value);
+		ft_envlstadd_back(&data->env, ft_envlstnew(NULL, NULL));
+	}
+}
+
 int	export_cmd(t_data *data, char **cmd)
 {
 	char		*name;
@@ -91,28 +104,13 @@ int	export_cmd(t_data *data, char **cmd)
 		name = set_name(cmd[i]);
 		if (!name)
 			return (1);
-		if (not_valid_env_arg(name))
-		{
-			ft_putstr_fd("export : not a correct identifier\n", 2);
+		if (not_valid_env_arg(name, 3))
 			return (1);
-		}
 		value = set_value(cmd[i]);
 		if (!value)
 			value = ft_strdup("");
-		if (get_venv(data->env, name))
-			env_rp_value(name, data->env, value);
-		else
-		{
-			lst = ft_envlstlast(lst);
-			free(lst->name);
-			lst->name = ft_strdup(name);
-			free(lst->value);
-			lst->value = ft_strdup(value);
-			ft_envlstadd_back(&data->env, ft_envlstnew(NULL, NULL));
-		}
+		node_add(lst, name, value, data);
 		i++;
 	}
-	free(value);
-	free(name);
-	return (SUCCESS);
+	return (1);
 }
