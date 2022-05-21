@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 20:47:47 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/19 22:42:25 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/21 21:39:14 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,38 +19,32 @@ void	fork_wrapper(pid_t *child)
 		(perror("Fork"));
 }
 
-void	exec_builtin_pipe(t_data *data, char **cmd)
+int	spawn_proc(int in, int out, int fd[2], t_data *data, t_cmd *command)
 {
-	fork_wrapper(&data->id);
-	if (data->id == CHILD)
-	{
-		g_exit = exec_builtin(data, cmd);
-	//	free
-		exit(g_exit);
-	}
-}
-
-int	spawn_proc(int in, int out, t_data *data, char **cmd)
-{
-	fork_wrapper(&data->id);
-	if (data->id == CHILD)
+	fork_wrapper(&command->id);
+	if (command->id == CHILD)
 	{
 		if (in != STDIN_FILENO)
 		{
 			dup2(in, STDIN_FILENO);
 			close(in);
+			close(fd[READ]);
 		}
+		else
+			close(fd[READ]);
 		if (out != STDOUT_FILENO)
 		{
 			dup2(out, STDOUT_FILENO);
 			close(out);
 		}
-		if (is_builtin(cmd))
+		else
+			close(fd[WRITE]);
+		if (is_builtin(command->cmd))
 		{
-			g_exit = exec_builtin(data, cmd);
+			g_exit = exec_builtin(data, command->cmd);
 			exit(g_exit);
 		}
-		execute(cmd, data->env_arr);
+		execute(command->cmd, data->env_arr);
     }
 	return (SUCCESS);
 }
@@ -68,20 +62,20 @@ int	fork_pipes(int n, t_data *data)
 	{
 		pipe(fd);
 		if (io[1] == STDOUT_FILENO)
-			spawn_proc(io[0], fd[1], data, data->cmds[i]->cmd);
+			spawn_proc(io[0], fd[1], fd, data, data->cmds[i]);
 		else
-			spawn_proc(io[0], data->cmds[i]->out, data, data->cmds[i]->cmd);
+			spawn_proc(io[0], data->cmds[i]->out, fd, data, data->cmds[i]);
 		close(fd[1]);
+		if (io[0] != STDIN_FILENO)
+			close(io[0]);
 		if (data->cmds[i + 1]->in == STDIN_FILENO)
-		{
 			io[0] = fd[0];
-			close(fd[0]);
-		}
 		else
 			io[0] = data->cmds[i + 1]->in;
 		i++;
 	}
-	spawn_proc(io[0], data->cmds[i]->out, data, data->cmds[i]->cmd);
+	spawn_proc(io[0], data->cmds[i]->out, fd, data, data->cmds[i]);
+	close(io[0]);
 	close(fd[0]);
 	return (SUCCESS);
 }

@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 16:56:07 by phaslan           #+#    #+#             */
-/*   Updated: 2022/05/19 14:10:19 by phaslan          ###   ########.fr       */
+/*   Updated: 2022/05/21 14:33:37 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,5 +109,5 @@ int	execute(char **cmd, char **envp)
 		execve(final_cmd, cmd, envp);
 	clean_all(paths, cmd, final_cmd);
 	ft_error("command not found");
-	return (126);
+	exit (g_exit);
 }

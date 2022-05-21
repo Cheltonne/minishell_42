@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 20:04:10 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/19 22:20:23 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/21 20:46:50 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,8 @@ int	handle_input(t_data *data, char **envp)
 		}
 		i++;
 	}
-	waitpid(data->id, &g_exit, 0);
+	for (i = 0; i < data->pipe_nb + 1; i++)
+		waitpid(data->cmds[i]->id, &g_exit, 0);
 	if (WIFEXITED(g_exit))
 		g_exit = WEXITSTATUS(g_exit);
 	return (SUCCESS);

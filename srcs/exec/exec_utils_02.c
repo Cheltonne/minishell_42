@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 17:40:59 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/19 21:28:41 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/21 22:59:46 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,8 @@ void	exec_single_cmd(t_data *data)
 		g_exit = exec_builtin(data, data->cmds[0]->cmd);
 		return ;
 	}
-	fork_wrapper(&data->id);
-	if (data->id == 0)
+	fork_wrapper(&data->cmds[0]->id);
+	if (data->cmds[0]->id == 0)
 	{
 		if (data->cmds[0]->in != 0 || data->cmds[0]->out != 1)
 		{

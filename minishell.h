@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 22:26:27 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/19 21:48:55 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/21 20:36:27 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ typedef struct s_cmd
 	char	**cmd;
 	int		in;
 	int		out;
+	pid_t	id;
 }				t_cmd;
 
 typedef struct s_data
@@ -91,7 +92,6 @@ typedef struct s_data
 	char			*line;
 	t_cmd			**cmds;
 	int				pipe_nb;
-	pid_t			id;
 	int				here_doc;
 }				t_data;
 
@@ -142,7 +142,7 @@ int			not_valid_env_arg(char *arg, int x);
 int			ft_strcmp(const char *s1, const char *s2);
 char		*get_venv(t_envlist *env, char *name);
 int			fork_pipes(int n, t_data *data);
-int			spawn_proc(int in, int out, t_data *data, char **cmd);
+int			spawn_proc(int in, int out, int fd[2], t_data *data, t_cmd *command);
 void		fork_wrapper(pid_t *child);
 void		redir_anal(t_tklist **head, t_cmd **ret, int *i);
 int			left_redirection(t_cmd **ret, t_tklist ***head);
