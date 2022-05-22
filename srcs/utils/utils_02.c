@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 21:53:10 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/19 14:20:37 by phaslan          ###   ########.fr       */
+/*   Updated: 2022/05/22 21:49:17 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,16 +64,17 @@ t_tklist	*ft_tklstlast(t_tklist *lst)
 	return (lst);
 }
 
-void	ft_tklstadd_back(t_tklist **alst, t_tklist *new)
+int	ft_tklstadd_back(t_tklist **alst, t_tklist *new)
 {
 	t_tklist	*last;
 
 	if (!*alst)
 	{
 		*alst = new;
-		return ;
+		return (SUCCESS);
 	}
 	last = ft_tklstlast(*alst);
 	last->next = new;
 	new->prev = last;
+	return (SUCCESS);
 }

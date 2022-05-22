@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 17:06:33 by phaslan           #+#    #+#             */
-/*   Updated: 2022/05/19 14:10:05 by phaslan          ###   ########.fr       */
+/*   Updated: 2022/05/22 23:35:11 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,33 +51,31 @@ int	go_home(void)
 	return (0);
 }
 
-void	update_cd(t_data *data)
+void	update_cd(t_data *data, t_cmd *command)
 {
-	char	*name[3];
-
-	name[0] = ft_strdup("export");
-	name[1] = ft_strjoin("OLDPWD=", getcwd(NULL, 0));
-	name[2] = ft_strdup("\0");
-	export_cmd(data, name);
+	command->cmd[0] = ft_strdup("export");
+	command->cmd[1] = ft_strjoin("OLDPWD=", getcwd(NULL, 0));
+	command->cmd[2] = ft_strdup("\0");
+	export_cmd(data, command);
 }
 
-int	cd_cmd(t_data *data, char **args)
+int	cd_cmd(t_data *data, t_cmd *command)
 {
 	int	i;
 
 	i = 0;
-	while (args[i])
+	while (command->cmd[i])
 		i++;
 	if (i >= 3)
 	{
 		ft_putstr_fd("cd : too many args\n", 2);
 		return (0);
 	}
-	if (!args[1] || args[1][0] == '~')
+	if (!command->cmd[1] || command->cmd[1][0] == '~')
 		return (go_home());
-	if (check_path(args[1]))
+	if (check_path(command->cmd[1]))
 		return (0);
-	update_cd(data);
-	chdir(args[1]);
+	chdir(command->cmd[1]);
+	update_cd(data, command);
 	return (0);
 }

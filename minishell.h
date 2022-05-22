@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 22:26:27 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/21 20:36:27 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/22 23:22:51 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,14 +106,14 @@ int			clean_all(char **paths, char **cmdarg, char *final);
 char		*search_path(char **paths, char *cmdarg);
 char		**get_all_paths(char **enpv, int line);
 int			execute(char **cmd, char **envp);
-void		exec_single_cmd(t_data *data);
+int			exec_single_cmd(t_data *data);
 void		exit_error(char *error_msg);
 int			pipe_count(t_tklist *token_list);
 int			setup_signal(void);
 t_tklist	*ft_tklstnew(t_type type, char *value);
 t_tklist	*ft_tklstlast(t_tklist *lst);
 int			ft_tklstsize(t_tklist *lst);
-void		ft_tklstadd_back(t_tklist **alst, t_tklist *new);
+int			ft_tklstadd_back(t_tklist **alst, t_tklist *new);
 void		ft_envlstadd_back(t_envlist **alst, t_envlist *new);
 int			set_data(t_data *data, char **envp);
 char		**dupenv(t_envlist *env);
@@ -128,13 +128,13 @@ t_tklist	*join_litterals(t_data *data);
 int			only_whitespaces(char *str);
 void		expand(t_data *data);
 int			good_expand(char *s1, char *s2);
-int			unset_cmd(t_data *data, char **argv);
-int			export_cmd(t_data *data, char **cmd);
+int			unset_cmd(t_data *data, t_cmd *command);
+int			export_cmd(t_data *data, t_cmd *command);
 int			env_cmd(t_data *data);
-int			cd_cmd(t_data *data, char **args);
-int			exec_builtin(t_data *data, char **cmd);
+int			cd_cmd(t_data *data, t_cmd *command);
+int			exec_builtin(t_data *data, t_cmd *command);
 int			is_builtin(char **cmd);
-int			echo_cmd(char **args, t_data *data);
+int			echo_cmd(t_cmd *command, t_data *data);
 int			try_pwd(t_data *data);
 char		*set_name(char *envp);
 char		*set_value(char *envp);
@@ -155,6 +155,7 @@ void		query_user(char *limiter, int *buf_fd);
 t_tklist	*redir_scan(t_data *data);
 t_tklist 	*suppr_quotes(t_data *data);
 t_tklist 	*join_litt(t_data *data);
-int			exit_cmd(t_data *data, char **args) ;
+int			exit_cmd(t_data *data, t_cmd *command);
+void		wait_wrapper(t_data *data);
 
 #endif

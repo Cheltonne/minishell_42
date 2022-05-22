@@ -29,6 +29,7 @@ BUILTIN_FILES = cd \
 UTILS_FILES = utils_01 \
 			  utils_02 \
 			  utils_03 \
+			  utils_04 \
 
 ERROR_FILES = error_handling \
 

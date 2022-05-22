@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 20:04:10 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/21 20:46:50 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/22 23:16:36 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,20 +63,11 @@ int	handle_input(t_data *data, char **envp)
 		data->cmds[i++] = cmd_builder(&data->token_list);
 	if (data->cmds == NULL)
 		return (FAILURE);
-	i = 0;
-	while (i < data->pipe_nb + 1)
-	{
-		if (data->pipe_nb == 0)
-			exec_single_cmd(data);
-		else
-		{
-			fork_pipes(data->pipe_nb + 1, data);
-			break ;
-		}
-		i++;
-	}
-	for (i = 0; i < data->pipe_nb + 1; i++)
-		waitpid(data->cmds[i]->id, &g_exit, 0);
+	if (data->pipe_nb == 0)
+		exec_single_cmd(data);
+	else
+		fork_pipes(data->pipe_nb + 1, data);
+	wait_wrapper(data);
 	if (WIFEXITED(g_exit))
 		g_exit = WEXITSTATUS(g_exit);
 	return (SUCCESS);
@@ -86,8 +77,7 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_data	*data;
 
-	(void)argv;
-	if (argc != 1)
+	if (argv && argc != 1)
 		exit_error("minishell does not accept any arguments 😰😱😨😰😥😓\n");
 	setup_signal();
 	data = ft_calloc(sizeof(t_data), 1);
@@ -99,7 +89,8 @@ int	main(int argc, char **argv, char **envp)
 	while (1)
 	{
 		data->line = readline("jcrois jsuis amsomniaque o_O >");
-		if (data->line && *data->line != '\0' && only_whitespaces(data->line) == FALSE)
+		if (data->line && *data->line != '\0' && only_whitespaces(data->line) \
+		== FALSE)
 		{
 			if (handle_input(data, envp) == FAILURE)
 				break ;

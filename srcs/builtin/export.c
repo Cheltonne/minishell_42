@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 14:55:24 by phaslan           #+#    #+#             */
-/*   Updated: 2022/05/19 21:48:23 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/22 20:37:03 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,7 @@ void	node_add(t_envlist *lst, char *name, char *value, t_data *data)
 	}
 }
 
-int	export_cmd(t_data *data, char **cmd)
+int	export_cmd(t_data *data, t_cmd *command)
 {
 	char		*name;
 	char		*value;
@@ -97,16 +97,16 @@ int	export_cmd(t_data *data, char **cmd)
 	value = NULL;
 	i = 1;
 	lst = ft_envlstlast(data->env);
-	if (!cmd[1])
+	if (!command->cmd[1])
 		env_export(data);
-	while (cmd[i])
+	while (command->cmd[i])
 	{
-		name = set_name(cmd[i]);
+		name = set_name(command->cmd[i]);
 		if (!name)
 			return (1);
 		if (not_valid_env_arg(name, 3))
 			return (1);
-		value = set_value(cmd[i]);
+		value = set_value(command->cmd[i]);
 		if (!value)
 			value = ft_strdup("");
 		node_add(lst, name, value, data);

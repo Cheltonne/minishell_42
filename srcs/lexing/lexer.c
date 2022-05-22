@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 17:33:11 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/19 17:56:20 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/22 21:51:49 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,8 @@ t_tklist	*f_token_builder(t_token **tokens, int tokens_len)
 			f_value = ft_strjoin(f_value, tokens[i + 1]->value);
 		else
 		{
-			if (!(o == 0 && (ret = ft_tklstnew(tokens[i]->type, f_value))))
-				ft_tklstadd_back(&ret, ft_tklstnew(tokens[i]->type, f_value));
+			(void)(((o == 0) && (ret = ft_tklstnew(tokens[i]->type, f_value)))\
+			|| ft_tklstadd_back(&ret, ft_tklstnew(tokens[i]->type, f_value)));
 			f_value = ft_strdup(tokens[i + 1]->value);
 			o++;
 		}
