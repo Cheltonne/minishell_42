@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 22:26:27 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/22 23:22:51 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/23 08:24:35 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,9 @@
 # define WRITE 1
 # define READ 0
 # define CHILD 0
+# define COLOR_ORANGE "\1\033[38;5;208m\2"
+# define COLOR_RESET "\1\x1b[0m\2"
+# define PS1 "minishell de ses Morts\1💀💀󠁩󠁲>󠀱󠀶󠁿\2 "
 
 # include "libft/libft.h"
 # include "gnl/get_next_line.h"
@@ -156,6 +159,7 @@ t_tklist	*redir_scan(t_data *data);
 t_tklist 	*suppr_quotes(t_data *data);
 t_tklist 	*join_litt(t_data *data);
 int			exit_cmd(t_data *data, t_cmd *command);
+void		verify_main_args(int argc, char** argv, char **envp);
 void		wait_wrapper(t_data *data);
 
 #endif
