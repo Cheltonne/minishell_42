@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 16:56:07 by phaslan           #+#    #+#             */
-/*   Updated: 2022/05/23 12:55:45 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/23 14:55:06 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,7 +91,7 @@ int	execute(char **cmd, char **envp)
 	char	*final_cmd;
 	int		line;
 
-	line = ft_table_count(envp);
+	line = ft_table_count((void **)(envp));
 	paths = get_all_paths(envp, line);
 	if (paths == NULL)
 	{

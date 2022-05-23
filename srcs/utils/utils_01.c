@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 16:00:53 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/19 14:19:08 by phaslan          ###   ########.fr       */
+/*   Updated: 2022/05/23 15:31:17 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ int	clean_all(char **paths, char **cmdarg, char *final)
 	return (0);
 }
 
-int	ft_table_count(char **file)
+int	ft_table_count(void **file)
 {
 	int	i;
 

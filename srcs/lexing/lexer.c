@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/26 17:33:11 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/23 14:11:24 by phaslan          ###   ########.fr       */
+/*   Updated: 2022/05/23 17:18:43 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,13 +67,11 @@ t_tklist	*f_token_builder(t_token **tokens, int tokens_len)
 		{
 			(void)(((o == 0) && (ret = ft_tklstnew(tokens[i]->type, f_value)))\
 			|| ft_tklstadd_back(&ret, ft_tklstnew(tokens[i]->type, f_value)));
-			// free(f_value);
-			(void)((!(f_value = ft_strdup(tokens[i + 1]->value)) || (ad(&o))));
+			o++;
 		}
 	}
 	ft_tklstadd_back(&ret, ft_tklstnew(END, NULL));
-	free(f_value);
-	free(tokens);
+	free_dual_token_arr(tokens, tokens_len);
 	return (ret);
 }
 
