@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 14:38:38 by phaslan           #+#    #+#             */
-/*   Updated: 2022/05/23 17:06:11 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/23 19:22:14 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@ void	free_env(t_envlist *lst)
 			del_node(lst);
 			lst = tmp;
 		}
+		free(lst->name);
+		free(lst->value);
+		free(lst);
 	}
 }
 

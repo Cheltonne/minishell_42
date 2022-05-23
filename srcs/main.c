@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 20:04:10 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/23 17:11:53 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/23 18:37:25 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,10 @@
 
 int	g_exit;
 
-int	mini_exit(void)
+int	mini_exit(t_data *data)
 {
 	ft_putstr_fd("\nexit", 2);
+	free_everything(data);
 	exit(g_exit % 255);
 	return (0);
 }
@@ -36,10 +37,14 @@ int	only_whitespaces(char *str)
 
 int	set_data(t_data *data, char **envp)
 {
+	char	*buf;
+
+	buf = ft_strjoin(data->line, " ", 0);
 	data->cmds = ft_calloc(sizeof(t_cmd), 1);
 	if (data->cmds == NULL)
 		return (FAILURE);
-	data->token_list = lexer(ft_strjoin(data->line, " ", 0));
+	data->token_list = lexer(buf);
+	free(buf);
 	if (data->token_list == NULL)
 		return (FAILURE);
 	data->token_list = second_scan(data);
@@ -69,7 +74,6 @@ int	handle_input(t_data *data, char **envp)
 		data->cmds[i++] = cmd_builder(&data->token_list);
 	if (data->cmds == NULL)
 		return (FAILURE);
-	printf("%s\n", data->token_list->prev->value);
 	if (data->pipe_nb == 0)
 		exec_single_cmd(data);
 	else
@@ -102,8 +106,9 @@ int	main(int argc, char **argv, char **envp)
 				break ;
 		}
 		else if (data->line == NULL)
-			mini_exit();
-		free(data->line);
+			mini_exit(data);
+		temp_free(data);
 	}
+	free_everything(data);
 	return (0);
 }
