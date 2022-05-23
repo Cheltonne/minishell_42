@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 22:26:27 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/23 13:37:25 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/23 16:17:41 by phaslan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,9 +39,9 @@
 # include <dirent.h>
 # include <sys/stat.h>
 
-extern int g_exit;
+extern int	g_exit;
 
-typedef enum			e_type
+typedef enum e_type
 {
 	LITTERAL,
 	WHITESPACE,
@@ -155,12 +155,16 @@ t_tklist	*suppr_quotes(t_data *data);
 t_tklist	*join_litt(t_data *data);
 void		query_user(char *limiter, int *buf_fd);
 t_tklist	*redir_scan(t_data *data);
-t_tklist 	*suppr_quotes(t_data *data);
-t_tklist 	*join_litt(t_data *data);
+t_tklist	*suppr_quotes(t_data *data);
+t_tklist	*join_litt(t_data *data);
 int			exit_cmd(t_data *data, t_cmd *command);
 void		verify_main_args(int argc, char** argv, char **envp);
 void		wait_wrapper(t_data *data);
 void		free_everything(t_data *data);
 int			ad(int *value);
+int			parent_signal(void);
+void		sig_fork(int sig);
+void		heredoc_sighandler(int sig);
+void		signal_heredoc(int signal);
 
 #endif
