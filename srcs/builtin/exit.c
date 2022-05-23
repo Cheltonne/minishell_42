@@ -6,7 +6,7 @@
 /*   By: paslan <paslan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 14:38:38 by phaslan           #+#    #+#             */
-/*   Updated: 2022/05/22 20:38:04 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/23 16:28:38 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,8 +114,8 @@ int exit_cmd(t_data *data, t_cmd *command)
         	ft_putstr_fd("exit\n", 2);
         if (command->cmd[1] != NULL)
 			g_exit = ft_strdigit(command->cmd[1]);
-		ft_chartable_free(data->env_arr);
-        
+		ft_chartable_free(data->env_arr);	
+
 		exit(g_exit);
         // il faut que je code le truc qui va permettre de free
         // la structure data

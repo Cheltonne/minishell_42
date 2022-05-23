@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 20:04:10 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/23 12:57:27 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/23 16:54:43 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ int	handle_input(t_data *data, char **envp)
 		data->cmds[i++] = cmd_builder(&data->token_list);
 	if (data->cmds == NULL)
 		return (FAILURE);
+	printf("%s\n", data->token_list->prev->value);
 	if (data->pipe_nb == 0)
 		exec_single_cmd(data);
 	else
@@ -94,9 +95,8 @@ int	main(int argc, char **argv, char **envp)
 				break ;
 		}
 		else if (data->line == NULL)
-			printf("\n");
-		free(data->line);
+			exit (g_exit);
+		free_everything(data);
 	}
-	free_everything(data);
 	return (0);
 }
