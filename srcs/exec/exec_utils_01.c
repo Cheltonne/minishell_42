@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 16:56:07 by phaslan           #+#    #+#             */
-/*   Updated: 2022/05/21 14:33:37 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/23 12:55:45 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,10 +67,10 @@ char	*search_path(char **paths, char *cmdarg)
 		return (cmdarg);
 	while (paths[i])
 	{
-		buff = ft_strjoin(paths[i], "/");
+		buff = ft_strjoin(paths[i], "/", 0);
 		if (buff == NULL)
 			return (null_error("malloc failed"));
-		final_cmd = ft_strjoin(buff, cmdarg);
+		final_cmd = ft_strjoin(buff, cmdarg, 0);
 		if (final_cmd == NULL)
 			return (null_error("malloc failed"));
 		if (access(final_cmd, R_OK) == 0)

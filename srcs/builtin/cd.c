@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 17:06:33 by phaslan           #+#    #+#             */
-/*   Updated: 2022/05/23 08:05:33 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/23 12:57:59 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ int	go_home(void)
 void	update_cd(t_data *data, t_cmd *command, char *oldpwd)
 {
 	command->cmd[0] = ft_strdup("export");
-	command->cmd[1] = ft_strjoin("OLDPWD=", oldpwd);
+	command->cmd[1] = ft_strjoin("OLDPWD=", oldpwd, 0);
 	command->cmd[2] = ft_strdup("\0");
 	export_cmd(data, command);
 }

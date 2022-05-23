@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 20:04:10 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/23 08:18:15 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/23 12:57:27 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,10 @@ int	only_whitespaces(char *str)
 
 int	set_data(t_data *data, char **envp)
 {
-	data->here_doc = 0;
 	data->cmds = ft_calloc(sizeof(t_cmd), 1);
 	if (data->cmds == NULL)
 		return (FAILURE);
-	data->token_list = lexer(ft_strjoin(data->line, " "));
+	data->token_list = lexer(ft_strjoin(data->line, " ", 0));
 	if (data->token_list == NULL)
 		return (FAILURE);
 	data->token_list = second_scan(data);
@@ -98,5 +97,6 @@ int	main(int argc, char **argv, char **envp)
 			printf("\n");
 		free(data->line);
 	}
+	free_everything(data);
 	return (0);
 }

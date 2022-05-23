@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 22:26:27 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/23 08:24:35 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/23 13:37:25 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,6 @@ typedef struct s_data
 	char			*line;
 	t_cmd			**cmds;
 	int				pipe_nb;
-	int				here_doc;
 }				t_data;
 
 t_tklist	*lexer(char *line);
@@ -161,5 +160,7 @@ t_tklist 	*join_litt(t_data *data);
 int			exit_cmd(t_data *data, t_cmd *command);
 void		verify_main_args(int argc, char** argv, char **envp);
 void		wait_wrapper(t_data *data);
+void		free_everything(t_data *data);
+int			ad(int *value);
 
 #endif

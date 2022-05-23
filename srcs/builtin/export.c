@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 14:55:24 by phaslan           #+#    #+#             */
-/*   Updated: 2022/05/22 20:37:03 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/23 12:59:11 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	env_export(t_data *data)
 			break ;
 		while (copy->name != NULL)
 		{
-			name = ft_strjoin(copy->name, "=");
+			name = ft_strjoin(copy->name, "=", 0);
 			ft_putstr_fd("export ", 2);
 			ft_putstr_fd(name, 2);
 			ft_putstr_fd(copy->value, 2);
