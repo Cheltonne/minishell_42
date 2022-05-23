@@ -6,13 +6,20 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 20:04:10 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/23 16:54:43 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/23 17:04:19 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../minishell.h"
 
 int	g_exit;
+
+int	mini_exit(void)
+{
+	ft_putstr_fd("\nexit", 2);
+	exit(g_exit % 255);
+	return (0);
+}
 
 int	only_whitespaces(char *str)
 {
@@ -78,7 +85,6 @@ int	main(int argc, char **argv, char **envp)
 	t_data	*data;
 
 	verify_main_args(argc, argv, envp);
-	setup_signal();
 	data = ft_calloc(sizeof(t_data), 1);
 	if (!data)
 		return (1);
@@ -87,6 +93,7 @@ int	main(int argc, char **argv, char **envp)
 	g_exit = 0;
 	while (1)
 	{
+		setup_signal();
 		data->line = readline(COLOR_ORANGE PS1 COLOR_RESET);
 		if (data->line && *data->line != '\0' && only_whitespaces(data->line) \
 		== FALSE)
@@ -95,8 +102,8 @@ int	main(int argc, char **argv, char **envp)
 				break ;
 		}
 		else if (data->line == NULL)
-			exit (g_exit);
-		free_everything(data);
+			mini_exit();
+		free(data->line);
 	}
 	return (0);
 }
