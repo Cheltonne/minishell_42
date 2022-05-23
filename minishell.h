@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 22:26:27 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/23 17:07:18 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/23 19:23:26 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -159,6 +159,7 @@ t_tklist	*join_litt(t_data *data);
 int			exit_cmd(t_data *data, t_cmd *command);
 void		verify_main_args(int argc, char** argv, char **envp);
 void		wait_wrapper(t_data *data);
+void		temp_free(t_data *data);
 void		free_everything(t_data *data);
 int			ad(int *value);
 void		free_dual_token_arr(t_token **tokens, int tokens_len);
@@ -167,5 +168,7 @@ int			parent_signal(void);
 void		sig_fork(int sig);
 void		heredoc_sighandler(int sig);
 void		signal_heredoc(int signal);
+void		free_env(t_envlist *lst);
+
 
 #endif

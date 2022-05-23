@@ -6,7 +6,7 @@
 /*   By: chajax <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 14:10:25 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/23 17:00:21 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/23 19:24:14 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	free_cmds(t_data *data)
 	while (i < data->pipe_nb + 1)
 	{
 		o = 0;
-		while (o < ft_table_count((void **)data->cmds[i]))
+		while (o < ft_table_count((void **)data->cmds[i]->cmd))
 		{
 			free(data->cmds[i]->cmd[o]);
 			o++;
@@ -70,7 +70,7 @@ void	free_cmds(t_data *data)
 		free(data->cmds);
 }
 
-void	free_everything(t_data *data)
+void	temp_free(t_data *data)
 {
 	free(data->line);
 	ft_tklstclear(&data->token_list, &free);
@@ -78,3 +78,10 @@ void	free_everything(t_data *data)
 	unlink(".here_doc");
 }
 
+void	free_everything(t_data *data)
+{
+	temp_free(data);
+	free_env(data->env);
+	ft_chartable_free(data->env_arr);
+	free(data);
+}
