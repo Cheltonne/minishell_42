@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 22:26:27 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/19 21:59:36 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/23 12:56:20 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,30 +45,30 @@ void	del_tknode(t_tklist *node)
 	}
 }
 
-t_tklist    *join_litterals(t_data *data)
+t_tklist	*join_litterals(t_data *data)
 {
-    t_tklist    *tk;
+	t_tklist	*tk;
 
-    tk = data->token_list;
-    while (tk->type != END)
-    {
-        if (tk->type == D_QUOTE)
-        {
-            tk = tk->next;
-            while (tk->type != END && tk->next->type != D_QUOTE)
-            {
-                if (tk->type != D_QUOTE)
-                {
-                    tk->next->value = ft_strjoin(tk->value, tk->next->value);
-                    tk = tk->next;
-                    del_tknode(tk->prev);
-                }
-                else
-                    break ;
-            }
-            tk = tk->next;
-        }
-        if (tk->type != END)
+	tk = data->token_list;
+	while (tk->type != END)
+	{
+		if (tk->type == D_QUOTE)
+		{
+			tk = tk->next;
+			while (tk->type != END && tk->next->type != D_QUOTE)
+			{
+				if (tk->type != D_QUOTE)
+				{
+					tk->next->value = ft_strjoin(tk->value, tk->next->value, 2);
+					tk = tk->next;
+					del_tknode(tk->prev);
+				}
+				else
+					break ;
+			}
+			tk = tk->next;
+		}
+		if (tk->type != END)
 			tk = tk->next;
 	}
 	return (data->token_list);
@@ -105,7 +105,7 @@ t_tklist	*join_litt(t_data *data)
 	{
 		if (tk->type == LITTERAL && tk->next->type == LITTERAL)
 		{
-			tk->value = ft_strjoin(tk->value, tk->next->value);
+			tk->value = ft_strjoin(tk->value, tk->next->value, 1);
 			del_tknode(tk->next);
 		}
 		else

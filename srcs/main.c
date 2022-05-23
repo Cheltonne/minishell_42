@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 20:04:10 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/19 19:23:56 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/23 12:57:27 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,10 @@ int	only_whitespaces(char *str)
 
 int	set_data(t_data *data, char **envp)
 {
-	data->here_doc = 0;
 	data->cmds = ft_calloc(sizeof(t_cmd), 1);
 	if (data->cmds == NULL)
 		return (FAILURE);
-	data->token_list = lexer(ft_strjoin(data->line, " "));
+	data->token_list = lexer(ft_strjoin(data->line, " ", 0));
 	if (data->token_list == NULL)
 		return (FAILURE);
 	data->token_list = second_scan(data);
@@ -63,19 +62,11 @@ int	handle_input(t_data *data, char **envp)
 		data->cmds[i++] = cmd_builder(&data->token_list);
 	if (data->cmds == NULL)
 		return (FAILURE);
-	i = 0;
-	while (i < data->pipe_nb + 1)
-	{
-		if (data->pipe_nb == 0)
-			exec_single_cmd(data);
-		else
-		{
-			fork_pipes(data->pipe_nb + 1, data);
-			break ;
-		}
-		i++;
-	}
-	waitpid(data->id, &g_exit, 0);
+	if (data->pipe_nb == 0)
+		exec_single_cmd(data);
+	else
+		fork_pipes(data->pipe_nb + 1, data);
+	wait_wrapper(data);
 	if (WIFEXITED(g_exit))
 		g_exit = WEXITSTATUS(g_exit);
 	return (SUCCESS);
@@ -85,9 +76,7 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_data	*data;
 
-	(void)argv;
-	if (argc != 1)
-		exit_error("minishell does not accept any arguments 😰😱😨😰😥😓\n");
+	verify_main_args(argc, argv, envp);
 	setup_signal();
 	data = ft_calloc(sizeof(t_data), 1);
 	if (!data)
@@ -97,8 +86,9 @@ int	main(int argc, char **argv, char **envp)
 	g_exit = 0;
 	while (1)
 	{
-		data->line = readline("jcrois jsuis amsomniaque o_O >");
-		if (data->line && *data->line != '\0' && only_whitespaces(data->line) == FALSE)
+		data->line = readline(COLOR_ORANGE PS1 COLOR_RESET);
+		if (data->line && *data->line != '\0' && only_whitespaces(data->line) \
+		== FALSE)
 		{
 			if (handle_input(data, envp) == FAILURE)
 				break ;
@@ -107,5 +97,6 @@ int	main(int argc, char **argv, char **envp)
 			printf("\n");
 		free(data->line);
 	}
+	free_everything(data);
 	return (0);
 }

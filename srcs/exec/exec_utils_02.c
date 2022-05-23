@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 17:40:59 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/19 21:28:41 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/22 23:18:39 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,8 @@ void	cmd_builder_norm(t_tklist **head, t_cmd **ret, int *i)
 
 int	pipe_count(t_tklist *token_list)
 {
-	int	ret;
-	t_tklist *head;
+	int			ret;
+	t_tklist	*head;
 
 	ret = 0;
 	head = token_list;
@@ -53,15 +53,15 @@ int	pipe_count(t_tklist *token_list)
 	return (ret);
 }
 
-void	exec_single_cmd(t_data *data)
+int	exec_single_cmd(t_data *data)
 {
 	if (is_builtin(data->cmds[0]->cmd))
 	{
-		g_exit = exec_builtin(data, data->cmds[0]->cmd);
-		return ;
+		g_exit = exec_builtin(data, data->cmds[0]);
+		return (SUCCESS);
 	}
-	fork_wrapper(&data->id);
-	if (data->id == 0)
+	fork_wrapper(&data->cmds[0]->id);
+	if (data->cmds[0]->id == 0)
 	{
 		if (data->cmds[0]->in != 0 || data->cmds[0]->out != 1)
 		{
@@ -70,4 +70,5 @@ void	exec_single_cmd(t_data *data)
 		}
 		execute(data->cmds[0]->cmd, data->env_arr);
 	}
+	return (FAILURE);
 }

@@ -1,9 +1,0 @@
-Makefile
-cuck.txt
-gnl
-grammar.ebnf
-libft
-minishell
-minishell.h
-srcs
-jcrois jsuis amsomniaque o_O >exit

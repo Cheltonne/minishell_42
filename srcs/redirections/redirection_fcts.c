@@ -6,7 +6,7 @@
 /*   By: chajax <chajax@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 15:45:09 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/16 20:53:38 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/22 22:14:47 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,7 @@
 void	redir_anal(t_tklist **head, t_cmd **ret, int *i)
 {
 	if ((*head)->type == L_REDIR)
-	{
-		if (left_redirection(ret, &head))
-			;
-		else
-			(*ret)->cmd[(*i++)] = NULL;
-	}
+		(void)((left_redirection(ret, &head)) || ((*ret)->cmd[(*i++)] = NULL));
 	else if ((*head)->type == R_REDIR)
 	{
 		if (right_redirection(ret, &head))
