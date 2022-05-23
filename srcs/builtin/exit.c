@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 14:38:38 by phaslan           #+#    #+#             */
-/*   Updated: 2022/05/23 19:22:14 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/23 21:40:00 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	free_env(t_envlist *lst)
 
 	if (lst)
 	{
-		while (!ft_strcmp(lst->value, "END"))
+		while (lst->value != NULL)
 		{
 			tmp = lst->next;
 			del_node(lst);
@@ -100,14 +100,14 @@ int	exit_cmd(t_data *data, t_cmd *command)
 	else
 	{
 		clear_history();
-		free_env(data->env);
-		free_tokens(data->token_list);
+		//free_env(data->env);
+		//free_tokens(data->token_list);
 		if (data->pipe_nb == 0)
 			ft_putstr_fd("exit\n", 2);
 		if (command->cmd[1] != NULL)
 			g_exit = ft_strdigit(command->cmd[1]);
-
-		ft_chartable_free(data->env_arr);
+		//ft_chartable_free(data->env_arr);
+		free_everything(data);
 		exit(g_exit);
 	}
 }

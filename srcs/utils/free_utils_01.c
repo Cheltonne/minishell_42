@@ -6,7 +6,7 @@
 /*   By: chajax <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/23 14:10:25 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/23 19:24:14 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/23 23:12:42 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,3 +85,4 @@ void	free_everything(t_data *data)
 	ft_chartable_free(data->env_arr);
 	free(data);
 }
+

@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 15:40:45 by phaslan           #+#    #+#             */
-/*   Updated: 2022/05/23 12:52:56 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/23 23:55:15 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,14 @@ char	*set_name(char *envp)
 	size_t	i;
 	size_t	x;
 
-	x = 0;
+	x = -1;
 	i = 0;
 	name = NULL;
 	if (!envp || envp[0] == '=')
 		return (NULL);
-	while (envp[x])
-	{
+	while (envp[++x])
 		if (envp[x] == '=')
 			break ;
-		x++;
-	}
 	if (envp[x] != '=')
 		return (NULL);
 	name = (char *)malloc(sizeof(char) + (x + 1));
@@ -89,6 +86,12 @@ char	**dupenv(t_envlist *env)
 	return (ret);
 }
 
+void	dual_free(void *ptr, void *ptr2)
+{
+	free(ptr);
+	free(ptr2);
+}
+
 t_envlist	*setup_env(char **envp)
 {
 	char		*name;
@@ -109,10 +112,8 @@ t_envlist	*setup_env(char **envp)
 		value = set_value(envp[i]);
 		if (value == NULL)
 			return (NULL);
-		if (i == 0)
-			ret = ft_envlstnew(name, value);
-		else
-			ft_envlstadd_back(&ret, ft_envlstnew(name, value));
+		(void)(((i == 0) && (ret = ft_envlstnew(name, value))) ||\
+		(ft_envlstadd_back(&ret, ft_envlstnew(name, value))));
 		i++;
 	}
 	ft_envlstadd_back(&ret, ft_envlstnew(NULL, NULL));

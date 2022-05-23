@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 17:40:59 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/23 14:45:41 by phaslan          ###   ########.fr       */
+/*   Updated: 2022/05/23 22:49:30 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ int	exec_single_cmd(t_data *data)
 			dup2(data->cmds[0]->in, STDIN_FILENO);
 			dup2(data->cmds[0]->out, STDOUT_FILENO);
 		}
-		execute(data->cmds[0]->cmd, data->env_arr);
+		execute(data, data->cmds[0]->cmd, data->env_arr);
 	}
 	return (FAILURE);
 }

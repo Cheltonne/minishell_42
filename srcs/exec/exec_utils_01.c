@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 16:56:07 by phaslan           #+#    #+#             */
-/*   Updated: 2022/05/23 14:55:06 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/23 23:34:56 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ char	*search_path(char **paths, char *cmdarg)
 	return (0);
 }
 
-int	execute(char **cmd, char **envp)
+int	execute(t_data *data, char **cmd, char **envp)
 {
 	char	**paths;
 	char	*final_cmd;
@@ -102,12 +102,13 @@ int	execute(char **cmd, char **envp)
 	if (final_cmd == 0)
 	{
 		clean_all(paths, cmd, final_cmd);
-		perror("command not found");
+		perror("command not cucked");
 		exit (127);
 	}
 	else
 		execve(final_cmd, cmd, envp);
 	clean_all(paths, cmd, final_cmd);
+	free_everything(data);
 	ft_error("command not found");
 	exit (g_exit);
 }

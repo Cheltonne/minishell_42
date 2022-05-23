@@ -1,4 +1,4 @@
-/* ************************************************************************** */
+
 /*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   utils_03.c                                         :+:      :+:    :+:   */
@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 22:26:27 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/23 12:56:20 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/23 21:40:09 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,12 @@ void	del_node(t_envlist *node)
 	if (node->prev == NULL)
 	{
 		node->next->prev = NULL;
+		free(node->name);
+		free(node->value);
 		free(node);
 	}
 	else
-	{
+{
 		node->prev->next = node->next;
 		node->next->prev = node->prev;
 		free(node->name);
@@ -34,6 +36,7 @@ void	del_tknode(t_tklist *node)
 	if (node->prev == NULL)
 	{
 		node->next->prev = NULL;
+		free(node->value);
 		free(node);
 	}
 	else

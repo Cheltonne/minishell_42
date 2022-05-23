@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 14:55:24 by phaslan           #+#    #+#             */
-/*   Updated: 2022/05/23 12:59:11 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/23 22:37:45 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,10 @@ char	*get_venv(t_envlist *env, char *name)
 
 void	node_add(t_envlist *lst, char *name, char *value, t_data *data)
 {
-	if (get_venv(data->env, name))
+	char *buf;
+
+	buf = get_venv(data->env, name);
+	if (buf)
 		env_rp_value(name, data->env, value);
 	else
 	{
@@ -84,6 +87,7 @@ void	node_add(t_envlist *lst, char *name, char *value, t_data *data)
 		lst->value = ft_strdup(value);
 		ft_envlstadd_back(&data->env, ft_envlstnew(NULL, NULL));
 	}
+	free(buf);
 }
 
 int	export_cmd(t_data *data, t_cmd *command)
@@ -107,10 +111,11 @@ int	export_cmd(t_data *data, t_cmd *command)
 		if (not_valid_env_arg(name, 3))
 			return (1);
 		value = set_value(command->cmd[i]);
-		if (!value)
-			value = ft_strdup("");
+		(void)((value) || (value = ft_strdup("")));
 		node_add(lst, name, value, data);
+		free(name);
+		free(value);
 		i++;
 	}
-	return (1);
+	return (0);
 }

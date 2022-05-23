@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 22:26:27 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/23 19:23:26 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/23 22:48:16 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,6 +94,7 @@ typedef struct s_data
 	t_tklist		*token_list;
 	char			*line;
 	t_cmd			**cmds;
+	int				fd[2];
 	int				pipe_nb;
 }				t_data;
 
@@ -106,7 +107,7 @@ void		cmd_builder_norm(t_tklist **head, t_cmd **ret, int *i);
 int			clean_all(char **paths, char **cmdarg, char *final);
 char		*search_path(char **paths, char *cmdarg);
 char		**get_all_paths(char **enpv, int line);
-int			execute(char **cmd, char **envp);
+int			execute(t_data *data, char **cmd, char **envp);
 int			exec_single_cmd(t_data *data);
 void		exit_error(char *error_msg);
 int			pipe_count(t_tklist *token_list);
@@ -115,7 +116,7 @@ t_tklist	*ft_tklstnew(t_type type, char *value);
 t_tklist	*ft_tklstlast(t_tklist *lst);
 int			ft_tklstsize(t_tklist *lst);
 int			ft_tklstadd_back(t_tklist **alst, t_tklist *new);
-void		ft_envlstadd_back(t_envlist **alst, t_envlist *new);
+int			ft_envlstadd_back(t_envlist **alst, t_envlist *new);
 int			set_data(t_data *data, char **envp);
 char		**dupenv(t_envlist *env);
 t_envlist	*setup_env(char **envp);
@@ -143,7 +144,7 @@ int			not_valid_env_arg(char *arg, int x);
 int			ft_strcmp(const char *s1, const char *s2);
 char		*get_venv(t_envlist *env, char *name);
 int			fork_pipes(int n, t_data *data);
-int			spawn_proc(int in, int out, int fd[2], t_data *data, t_cmd *command);
+int			spawn_proc(int in, int out, t_data *data, t_cmd *command);
 void		fork_wrapper(pid_t *child);
 void		redir_anal(t_tklist **head, t_cmd **ret, int *i);
 int			left_redirection(t_cmd **ret, t_tklist ***head);
