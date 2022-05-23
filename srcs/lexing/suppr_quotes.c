@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 18:43:52 by phaslan           #+#    #+#             */
-/*   Updated: 2022/05/19 14:17:35 by phaslan          ###   ########.fr       */
+/*   Updated: 2022/05/23 12:52:12 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ t_tklist	*suppr_quotes(t_data *data)
 			del_tknode(tk->next);
 			if (tk->type == LITTERAL && tk->type->next == LITTERAL)
 			{
-				tk->value = ft_strjoin(tk->value, tk->next->value);
+				tk->value = ft_strjoin(tk->value, tk->next->value, 1);
 				del_tknode(tk->next);
 			}
 		}

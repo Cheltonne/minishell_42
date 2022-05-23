@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 22:26:27 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/19 14:20:29 by phaslan          ###   ########.fr       */
+/*   Updated: 2022/05/23 12:56:20 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ t_tklist	*join_litterals(t_data *data)
 			{
 				if (tk->type != D_QUOTE)
 				{
-					tk->next->value = ft_strjoin(tk->value, tk->next->value);
+					tk->next->value = ft_strjoin(tk->value, tk->next->value, 2);
 					tk = tk->next;
 					del_tknode(tk->prev);
 				}
@@ -71,9 +71,7 @@ t_tklist	*join_litterals(t_data *data)
 		if (tk->type != END)
 			tk = tk->next;
 	}
-	while (tk->prev)
-		tk = tk->prev;
-	return (tk);
+	return (data->token_list);
 }
 
 t_tklist	*suppr_quotes(t_data *data)
@@ -107,7 +105,7 @@ t_tklist	*join_litt(t_data *data)
 	{
 		if (tk->type == LITTERAL && tk->next->type == LITTERAL)
 		{
-			tk->value = ft_strjoin(tk->value, tk->next->value);
+			tk->value = ft_strjoin(tk->value, tk->next->value, 1);
 			del_tknode(tk->next);
 		}
 		else

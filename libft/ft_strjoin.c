@@ -1,18 +1,16 @@
-/* ************************************************************************** */
-/*                                                                            */
 /*                                                        :::      ::::::::   */
 /*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: chajax <chajax@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/06/02 14:23:41 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/16 21:04:49 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/23 12:38:48 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*ft_strjoin(char *s1, char *s2, int to_free)
 {
 	int		i;
 	int		o;
@@ -27,9 +25,13 @@ char	*ft_strjoin(char *s1, char *s2)
 		return (NULL);
 	while (s1[i])
 		new[o++] = s1[i++];
+	if (to_free == 1)
+		free(s1);
 	i = 0;
 	while (s2[i])
 		new[o++] = s2[i++];
+	if (to_free == 2)
+		free(s2);
 	new[o] = '\0';
 	return (new);
 }

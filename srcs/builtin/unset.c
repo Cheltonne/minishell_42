@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 12:31:21 by phaslan           #+#    #+#             */
-/*   Updated: 2022/05/19 14:09:42 by phaslan          ###   ########.fr       */
+/*   Updated: 2022/05/22 20:37:28 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,22 @@
 
 // d'ailleurs remplace celui dans quote.c par ca
 
-int	not_valid_env_arg(char *arg)
+int	not_valid_env_arg(char *arg, int x)
 {
 	int	i;
 
 	i = 1;
 	if (!ft_isalpha(arg[0]))
+	{
+		ft_putstr_fd("not a correct env identifier\n", 2);
 		return (1);
+	}
 	while (arg[i])
 	{
 		if (!ft_isalpha(arg[i]) && !ft_isdigit(arg[i]) && arg[i] != '_')
 		{
-			printf("je crash a ce %c", arg[i]);
+			if (x == 3)
+				ft_putstr_fd("not a correct env identifier\n", 2);
 			return (1);
 		}
 		i++;
@@ -56,20 +60,20 @@ t_envlist	*unset_env(t_envlist *env, char *arg)
 // j'arrive pas a unset un truc en particulier,
 // dans le cas ou j'ai salut331 et salut3 se vais unset salut3
 
-int	unset_cmd(t_data *data, char **argv)
+int	unset_cmd(t_data *data, t_cmd *command)
 {
 	int	i;
 
 	i = 1;
-	while (argv[i])
+	while (command->cmd[i])
 	{
-		while (argv[i] && not_valid_env_arg(argv[i]))
+		while (command->cmd[i] && not_valid_env_arg(command->cmd[i], 0))
 			i++;
-		if (!argv[i])
+		if (!command->cmd[i])
 			break ;
 		if (data->env)
 		{
-			data->env = unset_env(data->env, argv[i]);
+			data->env = unset_env(data->env, command->cmd[i]);
 		}
 		i++;
 	}

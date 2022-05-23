@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 14:55:24 by phaslan           #+#    #+#             */
-/*   Updated: 2022/05/19 17:05:03 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/23 12:59:11 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ void	env_export(t_data *data)
 			break ;
 		while (copy->name != NULL)
 		{
-			name = ft_strjoin(copy->name, "=");
+			name = ft_strjoin(copy->name, "=", 0);
 			ft_putstr_fd("export ", 2);
 			ft_putstr_fd(name, 2);
 			ft_putstr_fd(copy->value, 2);
@@ -73,7 +73,20 @@ char	*get_venv(t_envlist *env, char *name)
 	return (NULL);
 }
 
-int	export_cmd(t_data *data, char **cmd)
+void	node_add(t_envlist *lst, char *name, char *value, t_data *data)
+{
+	if (get_venv(data->env, name))
+		env_rp_value(name, data->env, value);
+	else
+	{
+		lst = ft_envlstlast(lst);
+		lst->name = ft_strdup(name);
+		lst->value = ft_strdup(value);
+		ft_envlstadd_back(&data->env, ft_envlstnew(NULL, NULL));
+	}
+}
+
+int	export_cmd(t_data *data, t_cmd *command)
 {
 	char		*name;
 	char		*value;
@@ -84,35 +97,20 @@ int	export_cmd(t_data *data, char **cmd)
 	value = NULL;
 	i = 1;
 	lst = ft_envlstlast(data->env);
-	if (!cmd[1])
+	if (!command->cmd[1])
 		env_export(data);
-	while (cmd[i])
+	while (command->cmd[i])
 	{
-		name = set_name(cmd[i]);
+		name = set_name(command->cmd[i]);
 		if (!name)
 			return (1);
-		if (not_valid_env_arg(name))
-		{
-			ft_putstr_fd("export : not a correct identifier\n", 2);
+		if (not_valid_env_arg(name, 3))
 			return (1);
-		}
-		value = set_value(cmd[i]);
+		value = set_value(command->cmd[i]);
 		if (!value)
 			value = ft_strdup("");
-		if (get_venv(data->env, name))
-			env_rp_value(name, data->env, value);
-		else
-		{
-			lst = ft_envlstlast(lst);
-			free(lst->name);
-			lst->name = ft_strdup(name);
-			free(lst->value);
-			lst->value = ft_strdup(value);
-			ft_envlstadd_back(&data->env, ft_envlstnew(NULL, NULL));
-		}
+		node_add(lst, name, value, data);
 		i++;
 	}
-	free(value);
-	free(name);
-	return (SUCCESS);
+	return (1);
 }

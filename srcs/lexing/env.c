@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 15:40:45 by phaslan           #+#    #+#             */
-/*   Updated: 2022/05/19 14:10:27 by phaslan          ###   ########.fr       */
+/*   Updated: 2022/05/23 12:52:56 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ char	**dupenv(t_envlist *env)
 		return (NULL);
 	while (copy->name != NULL)
 	{
-		str = ft_strjoin(copy->name, copy->value);
+		str = ft_strjoin(copy->name, copy->value, 0);
 		copy = copy->next;
 		ret[i] = str;
 		i++;

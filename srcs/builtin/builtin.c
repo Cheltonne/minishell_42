@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 17:06:33 by phaslan           #+#    #+#             */
-/*   Updated: 2022/05/19 21:40:23 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/22 20:36:47 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,21 +49,21 @@ int	is_builtin(char **cmd)
 	return (0);
 }
 
-int	exec_builtin(t_data *data, char **cmd)
+int	exec_builtin(t_data *data, t_cmd *command)
 {
-	if (!ft_strcmp(cmd[0], "cd"))
-		return (cd_cmd(data, cmd));
-	if (!ft_strcmp(cmd[0], "pwd"))
+	if (!ft_strcmp(command->cmd[0], "cd"))
+		return (cd_cmd(data, command));
+	if (!ft_strcmp(command->cmd[0], "pwd"))
 		return (try_pwd(data));
-	if (!ft_strcmp(cmd[0], "echo"))
-		return (echo_cmd(cmd, data));
-	if (!ft_strcmp(cmd[0], "unset"))
-		return (unset_cmd(data, cmd));
-	if (!ft_strcmp(cmd[0], "env"))
+	if (!ft_strcmp(command->cmd[0], "echo"))
+		return (echo_cmd(command, data));
+	if (!ft_strcmp(command->cmd[0], "unset"))
+		return (unset_cmd(data, command));
+	if (!ft_strcmp(command->cmd[0], "env"))
 		return (env_cmd(data));
-	if (!ft_strcmp(cmd[0], "export"))
-		return (export_cmd(data, cmd));
-	if (!ft_strcmp(cmd[0], "exit"))
-		return (exit_cmd(data, cmd));
+	if (!ft_strcmp(command->cmd[0], "export"))
+		return (export_cmd(data, command));
+	if (!ft_strcmp(command->cmd[0], "exit"))
+		return (exit_cmd(data, command));
 	return (1);
 }

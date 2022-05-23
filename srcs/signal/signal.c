@@ -6,7 +6,7 @@
 /*   By: paslan <paslan@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 16:50:45 by phaslan           #+#    #+#             */
-/*   Updated: 2022/05/11 15:35:51 by paslan           ###   ########.fr       */
+/*   Updated: 2022/05/21 14:30:42 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void  	signalc(int signal) // dans cat, un ctrl c fait 2 sauts de lignes
 	{
 		ft_putstr_fd("\n", 2);
 		rl_on_new_line();
-		// rl_replace_line("", 0);
+		rl_replace_line("", 0);
 		rl_redisplay();
 	}
 }
