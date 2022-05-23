@@ -115,7 +115,7 @@ t_tklist	*ft_tklstnew(t_type type, char *value);
 t_tklist	*ft_tklstlast(t_tklist *lst);
 int			ft_tklstsize(t_tklist *lst);
 int			ft_tklstadd_back(t_tklist **alst, t_tklist *new);
-void		ft_envlstadd_back(t_envlist **alst, t_envlist *new);
+int			ft_envlstadd_back(t_envlist **alst, t_envlist *new);
 int			set_data(t_data *data, char **envp);
 char		**dupenv(t_envlist *env);
 t_envlist	*setup_env(char **envp);
@@ -166,8 +166,6 @@ void		free_dual_token_arr(t_token **tokens, int tokens_len);
 void		ft_tklstclear(t_tklist **lst, void (*del)(void*));
 int			parent_signal(void);
 void		sig_fork(int sig);
-void		heredoc_sighandler(int sig);
-void		signal_heredoc(int signal);
 void		free_env(t_envlist *lst);
 
 

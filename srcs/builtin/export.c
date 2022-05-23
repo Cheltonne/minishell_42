@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 14:55:24 by phaslan           #+#    #+#             */
-/*   Updated: 2022/05/23 12:59:11 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/23 19:29:35 by phaslan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ char	*get_venv(t_envlist *env, char *name)
 	current = env;
 	while (current->name != NULL)
 	{
+		// printf("current name = %s\nname = %s\n", current->name, name);
 		if (!ft_strcmp(current->name, name))
 		{
 			if (!current->value)

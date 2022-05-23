@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 20:04:10 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/23 18:37:25 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/23 17:48:44 by phaslan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,6 +109,5 @@ int	main(int argc, char **argv, char **envp)
 			mini_exit(data);
 		temp_free(data);
 	}
-	free_everything(data);
 	return (0);
 }

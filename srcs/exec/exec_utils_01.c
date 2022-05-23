@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 16:56:07 by phaslan           #+#    #+#             */
-/*   Updated: 2022/05/23 14:55:06 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/23 18:15:14 by phaslan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,12 @@ char	**get_all_paths(char **enpv, int line)
 				*enpv += 1;
 			paths = ft_split(*enpv, ':');
 			if (!paths)
-				return (null_error("Unable to allocate PATHS 😱"));
+				return (null_error("Unable to allocate PATHS\n"));
 			return (paths);
 		}
 		if (++i == line)
 		{
-			perror("Unable to find PATH 😨");
+			ft_putstr_fd("bash: No such file or directory\n", 2);
 			return (0);
 		}
 		enpv++;
