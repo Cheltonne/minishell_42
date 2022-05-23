@@ -6,13 +6,11 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 12:31:21 by phaslan           #+#    #+#             */
-/*   Updated: 2022/05/22 20:37:28 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/23 17:05:17 by phaslan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
-
-// d'ailleurs remplace celui dans quote.c par ca
 
 int	not_valid_env_arg(char *arg, int x)
 {
@@ -53,12 +51,6 @@ t_envlist	*unset_env(t_envlist *env, char *arg)
 		env = env->prev;
 	return (env);
 }
-
-// j'arrive pas a en unset plusieurs d'un coup ??
-// pk j'ai pas reussi a unset 2 trucs d'un coup
-// j'arrive a unset plusieurs trucs
-// j'arrive pas a unset un truc en particulier,
-// dans le cas ou j'ai salut331 et salut3 se vais unset salut3
 
 int	unset_cmd(t_data *data, t_cmd *command)
 {

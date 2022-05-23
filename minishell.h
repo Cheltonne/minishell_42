@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 22:26:27 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/23 16:17:41 by phaslan          ###   ########.fr       */
+/*   Updated: 2022/05/23 17:05:34 by phaslan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -164,7 +164,5 @@ void		free_everything(t_data *data);
 int			ad(int *value);
 int			parent_signal(void);
 void		sig_fork(int sig);
-void		heredoc_sighandler(int sig);
-void		signal_heredoc(int signal);
 
 #endif
