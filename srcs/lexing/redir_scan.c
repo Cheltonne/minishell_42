@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 15:40:45 by phaslan           #+#    #+#             */
-/*   Updated: 2022/05/22 22:05:48 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/23 19:34:15 by phaslan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,43 +35,47 @@ t_tklist	*arrow_ncheck(t_tklist *tk)
 	return (tk);
 }
 
+int	parse_error(int i)
+{
+	if (i == 0)
+		ft_putstr_fd("bash:parse error near token '\\n'\n", 2);
+	if (i == 1)
+		ft_putstr_fd("bash:parse error near token '>'\n", 2);
+	if (i == 2)
+		ft_putstr_fd("bash:parse error near token '<'\n", 2);
+	return (2);
+}
+
+int	manage_arrow(t_tklist **tk)
+{
+	*tk = (*tk)->next;
+	if ((*tk)->type != WHITESPACE)
+		return (0);
+	return (1);
+}
+
 int	arrow_analyse(t_tklist *data)
 {
 	t_tklist	*tk;
 
 	tk = data;
 	if (tk->next->type == END)
-	{
-		ft_putstr_fd("bash:parse error near token '\\n'\n", 2);
-		return (2);
-	}
+		return (parse_error(0));
 	else if (tk->type == R_REDIR)
 	{
 		while (tk->prev != NULL)
-		{
-			tk = tk->next;
-			if (tk->type != WHITESPACE)
+			if (!manage_arrow(&tk))
 				break ;
-		}
 		if (tk->type != LITTERAL)
-		{
-			ft_putstr_fd("bash:parse error near token '>\n'", 2);
-			return (2);
-		}
+			return (parse_error(1));
 	}
 	else if (tk->type == L_REDIR)
 	{
 		while (tk->next->type != END)
-		{
-			tk = tk->next;
-			if (tk->type != WHITESPACE)
+			if (!manage_arrow(&tk))
 				break ;
-		}
 		if (tk->type != LITTERAL)
-		{
-			ft_putstr_fd("bash:parse error near token <\n", 2);
-			return (2);
-		}
+			return (parse_error(2));
 	}
 	return (0);
 }
@@ -101,7 +105,5 @@ t_tklist	*redir_scan(t_data *data)
 		}
 		tk = tk->next;
 	}
-	while (tk->prev != NULL)
-		tk = tk->prev;
-	return (tk);
+	return (data->token_list);
 }

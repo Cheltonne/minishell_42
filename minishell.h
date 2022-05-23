@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 22:26:27 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/23 17:05:34 by phaslan          ###   ########.fr       */
+/*   Updated: 2022/05/23 19:15:16 by phaslan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -116,7 +116,7 @@ t_tklist	*ft_tklstnew(t_type type, char *value);
 t_tklist	*ft_tklstlast(t_tklist *lst);
 int			ft_tklstsize(t_tklist *lst);
 int			ft_tklstadd_back(t_tklist **alst, t_tklist *new);
-void		ft_envlstadd_back(t_envlist **alst, t_envlist *new);
+int			ft_envlstadd_back(t_envlist **alst, t_envlist *new);
 int			set_data(t_data *data, char **envp);
 char		**dupenv(t_envlist *env);
 t_envlist	*setup_env(char **envp);

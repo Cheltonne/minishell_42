@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 20:04:10 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/23 17:04:26 by phaslan          ###   ########.fr       */
+/*   Updated: 2022/05/23 17:48:44 by phaslan          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,6 @@ int	g_exit;
 int	mini_exit(void)
 {
 	ft_putstr_fd("\nexit", 2);
-	free(data->line);
-	free_everything(data);
 	exit(g_exit % 255);
 	return (0);
 }
@@ -104,8 +102,8 @@ int	main(int argc, char **argv, char **envp)
 		}
 		else if (data->line == NULL)
 			mini_exit();
-		free(data->line);
+		free_everything(data);
+		// free(data->line);
 	}
-	free_everything(data);
 	return (0);
 }
