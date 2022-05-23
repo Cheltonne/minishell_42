@@ -91,7 +91,7 @@ int	execute(char **cmd, char **envp)
 	char	*final_cmd;
 	int		line;
 
-	line = ft_table_count(envp);
+	line = ft_table_count((void **)(envp));
 	paths = get_all_paths(envp, line);
 	if (paths == NULL)
 	{

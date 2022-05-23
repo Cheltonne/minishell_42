@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 22:26:27 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/23 19:15:16 by phaslan          ###   ########.fr       */
+/*   Updated: 2022/05/23 19:23:26 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,12 +98,11 @@ typedef struct s_data
 }				t_data;
 
 t_tklist	*lexer(char *line);
-int			ft_table_count(char **file);
+int			ft_table_count(void **file);
 int			sp_char_nb(t_tklist *tokens, t_type type);
 t_tklist	*second_scan(t_data *data);
 t_cmd		*cmd_builder(t_tklist **head);
 void		cmd_builder_norm(t_tklist **head, t_cmd **ret, int *i);
-int			ft_table_count(char **file);
 int			clean_all(char **paths, char **cmdarg, char *final);
 char		*search_path(char **paths, char *cmdarg);
 char		**get_all_paths(char **enpv, int line);
@@ -160,9 +159,14 @@ t_tklist	*join_litt(t_data *data);
 int			exit_cmd(t_data *data, t_cmd *command);
 void		verify_main_args(int argc, char** argv, char **envp);
 void		wait_wrapper(t_data *data);
+void		temp_free(t_data *data);
 void		free_everything(t_data *data);
 int			ad(int *value);
+void		free_dual_token_arr(t_token **tokens, int tokens_len);
+void		ft_tklstclear(t_tklist **lst, void (*del)(void*));
 int			parent_signal(void);
 void		sig_fork(int sig);
+void		free_env(t_envlist *lst);
+
 
 #endif

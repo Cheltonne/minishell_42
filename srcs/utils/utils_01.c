@@ -20,7 +20,7 @@ int	clean_all(char **paths, char **cmdarg, char *final)
 	return (0);
 }
 
-int	ft_table_count(char **file)
+int	ft_table_count(void **file)
 {
 	int	i;
 

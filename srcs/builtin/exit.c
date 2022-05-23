@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 14:38:38 by phaslan           #+#    #+#             */
-/*   Updated: 2022/05/23 14:22:28 by phaslan          ###   ########.fr       */
+/*   Updated: 2022/05/23 19:22:14 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,9 @@ void	free_env(t_envlist *lst)
 			del_node(lst);
 			lst = tmp;
 		}
+		free(lst->name);
+		free(lst->value);
+		free(lst);
 	}
 }
 
@@ -103,6 +106,7 @@ int	exit_cmd(t_data *data, t_cmd *command)
 			ft_putstr_fd("exit\n", 2);
 		if (command->cmd[1] != NULL)
 			g_exit = ft_strdigit(command->cmd[1]);
+
 		ft_chartable_free(data->env_arr);
 		exit(g_exit);
 	}

@@ -14,9 +14,10 @@
 
 int	g_exit;
 
-int	mini_exit(void)
+int	mini_exit(t_data *data)
 {
 	ft_putstr_fd("\nexit", 2);
+	free_everything(data);
 	exit(g_exit % 255);
 	return (0);
 }
@@ -36,10 +37,14 @@ int	only_whitespaces(char *str)
 
 int	set_data(t_data *data, char **envp)
 {
+	char	*buf;
+
+	buf = ft_strjoin(data->line, " ", 0);
 	data->cmds = ft_calloc(sizeof(t_cmd), 1);
 	if (data->cmds == NULL)
 		return (FAILURE);
-	data->token_list = lexer(ft_strjoin(data->line, " ", 0));
+	data->token_list = lexer(buf);
+	free(buf);
 	if (data->token_list == NULL)
 		return (FAILURE);
 	data->token_list = second_scan(data);
@@ -101,9 +106,8 @@ int	main(int argc, char **argv, char **envp)
 				break ;
 		}
 		else if (data->line == NULL)
-			mini_exit();
-		free_everything(data);
-		// free(data->line);
+			mini_exit(data);
+		temp_free(data);
 	}
 	return (0);
 }
