@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 15:40:45 by phaslan           #+#    #+#             */
-/*   Updated: 2022/05/24 16:17:38 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/25 00:54:19 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,32 +65,31 @@ char	**dupenv(t_envlist *env)
 {
 	int			i;
 	char		**ret;
-	char		*str;
 	t_envlist	*copy;
 
 	i = 0;
 	copy = env;
 	if (!copy)
 		return (NULL);
-	ret = malloc(sizeof(char *) * (ft_envlstsize(env) + 1));
+	ret = ft_calloc(sizeof(char *), (ft_envlstsize(env) + 1));
 	if (!ret)
 		return (NULL);
 	while (copy->name != NULL)
 	{
-		str = ft_strjoin(copy->name, copy->value, 0);
+		ret[i] = copy->string;
 		copy = copy->next;
-		ret[i] = str;
 		i++;
 	}
 	ret[i] = NULL;
 	return (ret);
 }
 
-t_envlist	*no_envp(void)
+t_envlist	*no_envp(t_data *data)
 {
 	t_envlist	*ret;
 	char		*name;
 
+	data->envp_is_set = FALSE;
 	name = NULL;
 	name = getcwd(NULL, 0);
 	ret = ft_envlstnew("PWD", name);
@@ -100,7 +99,7 @@ t_envlist	*no_envp(void)
 	return (ret);
 }
 
-t_envlist	*setup_env(char **envp)
+t_envlist	*setup_env(t_data *data, char **envp)
 {
 	char		*name;
 	char		*value;
@@ -108,10 +107,11 @@ t_envlist	*setup_env(char **envp)
 	t_envlist	*ret;
 
 	i = 0;
+	data->envp_is_set = TRUE;
 	name = NULL;
 	value = NULL;
 	if (*envp == NULL)
-		return (no_envp());
+		return (no_envp(data));
 	while (envp[i])
 	{
 		name = set_name(envp[i]);

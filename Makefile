@@ -112,7 +112,7 @@ fclean: clean
 	$(RM) $(NAME)
 	echo "\033[0;32mfclean rule = DONE\033[0m"
 
-re: clean all
+re: fclean all
 
 .SILENT:
 

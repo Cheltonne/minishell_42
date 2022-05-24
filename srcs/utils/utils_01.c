@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 16:00:53 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/23 20:16:52 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/24 22:36:55 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int	clean_all(char **paths, char **cmdarg, char *final)
 {
 	ft_chartable_free(paths);
-	ft_chartable_free(cmdarg);
+	(void)cmdarg;
 	free(final);
 	return (0);
 }
@@ -25,6 +25,8 @@ int	ft_table_count(void **file)
 	int	i;
 
 	i = 0;
+	if (file == NULL || *file == NULL)
+		return (0);
 	while (file[i])
 		i++;
 	return (i);

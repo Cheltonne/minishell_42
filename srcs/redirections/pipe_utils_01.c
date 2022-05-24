@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 20:47:47 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/24 11:22:21 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/25 00:58:21 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ int	spawn_proc(int in, int out, t_data *data, t_cmd *command)
 		if (is_builtin(command->cmd))
 		{
 			g_exit = exec_builtin(data, command);
+			if (data->envp_is_set == TRUE)
+				free_everything(data);
 			exit(g_exit);
 		}
 		execute(data, command->cmd, data->env_arr);

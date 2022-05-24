@@ -6,7 +6,7 @@
 /*   By: chajax <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/22 22:43:40 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/23 14:15:44 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/25 01:22:34 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,11 @@ int	ad(int *value)
 {
 	(*value) += 1;
 	return (SUCCESS);
+}
+
+void	init_env(t_data *data, char **envp)
+{
+	data->env = seteup_env(data, envp);
+	data->env_arr = dupenv(data->env);
+	g_exit = 0;
 }

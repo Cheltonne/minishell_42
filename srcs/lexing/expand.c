@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/14 16:27:02 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/24 17:10:27 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/25 01:12:32 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,14 +69,10 @@ void	expanding(t_data *data, t_tklist *tk)
 	}
 	else
 	{
-		printf("la valeur suivante est %s\n", tk->next->value);
 		x = egal_expand(tk->next->value);
 		name = true_name(tk->next->value);
-		printf("le true name est %s\n", name);
-		printf("le nombre de = est %d\n", x);
 		free(tk->next->value);
 		tk->next->value = get_venv(data->env, name);
-		printf("la nouvelle valeur du $ est %s\n", tk->next->value);
 		if (tk->next->value == NULL)
 			tk->next->value = ft_strdup("");
 		else if (x)
@@ -85,14 +81,13 @@ void	expanding(t_data *data, t_tklist *tk)
 	}
 }
 
-void	expand(t_data *data)
+t_tklist	*expand(t_data *data)
 {
 	t_tklist	*tk;
 
 	tk = data->token_list;
 	while (tk->type != END)
 	{
-		// printf("je suis la %s dans expand\n", tk->value);
 		if (tk->type == DOLLAR)
 		{
 			if (tk->next->type == LITTERAL)
@@ -105,4 +100,7 @@ void	expand(t_data *data)
 		if (tk->type != END)
 			tk = tk->next;
 	}
+	while (tk->prev != NULL)
+		tk = tk->prev;
+	return (tk);
 }

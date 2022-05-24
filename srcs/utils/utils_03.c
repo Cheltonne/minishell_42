@@ -6,7 +6,7 @@
 /*   By: chajax <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 11:22:49 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/24 11:23:11 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/25 01:14:57 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	del_node(t_envlist *node)
 	if (node->prev == NULL)
 	{
 		node->next->prev = NULL;
+		free(node->string);
 		free(node->name);
 		free(node->value);
 		free(node);
@@ -26,6 +27,7 @@ void	del_node(t_envlist *node)
 		node->prev->next = node->next;
 		node->next->prev = node->prev;
 		free(node->name);
+		free(node->string);
 		free(node->value);
 		free(node);
 	}

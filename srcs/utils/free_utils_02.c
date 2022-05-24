@@ -6,7 +6,7 @@
 /*   By: chajax <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 11:20:22 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/24 16:09:23 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/24 22:34:46 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,8 @@ void	temp_free(t_data *data)
 {
 	free(data->line);
 	ft_tklstclear(&data->token_list, &free);
-	free_cmds(data);
+	if (data->cmds != NULL)
+		free_cmds(data);
 	unlink(".here_doc");
 }
 
@@ -45,7 +46,7 @@ void	free_everything(t_data *data)
 {
 	temp_free(data);
 	free_env(data->env);
-	ft_chartable_free(data->env_arr);
+	free(data->env_arr);
 	free(data);
 }
 

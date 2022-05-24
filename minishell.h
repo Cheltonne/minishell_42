@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 22:26:27 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/24 16:13:23 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/25 00:54:46 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,7 @@ typedef struct s_envlist
 {
 	char				*name;
 	char				*value;
+	char				*string;
 	struct s_envlist	*next;
 	struct s_envlist	*prev;
 }				t_envlist;
@@ -91,6 +92,7 @@ typedef struct s_data
 {
 	t_envlist		*env;
 	char			**env_arr;
+	int				envp_is_set;
 	t_tklist		*token_list;
 	char			*line;
 	t_cmd			**cmds;
@@ -109,7 +111,7 @@ char		*search_path(char **paths, char *cmdarg);
 char		**get_all_paths(char **enpv, int line);
 int			execute(t_data *data, char **cmd, char **envp);
 int			exec_single_cmd(t_data *data);
-void		exit_error(char *error_msg);
+void		exit_error(char *error_msg, t_data *data);
 int			pipe_count(t_tklist *token_list);
 int			setup_signal(void);
 t_tklist	*ft_tklstnew(t_type type, char *value);
@@ -119,16 +121,15 @@ int			ft_tklstadd_back(t_tklist **alst, t_tklist *new);
 int			ft_envlstadd_back(t_envlist **alst, t_envlist *new);
 int			set_data(t_data *data, char **envp);
 char		**dupenv(t_envlist *env);
-t_envlist	*setup_env(char **envp);
+t_envlist	*setup_env(t_data *data, char **envp);
 t_envlist	*ft_envlstnew(char *name, char *value);
 int			ft_envlstsize(t_envlist *lst);
-void		expand(t_data *data);
+t_tklist	*expand(t_data *data);
 void		del_node(t_envlist *node);
 void		del_tknode(t_tklist *node);
 t_envlist	*ft_envlstlast(t_envlist *lst);
 t_tklist	*join_litterals(t_data *data);
 int			only_whitespaces(char *str);
-void		expand(t_data *data);
 int			good_expand(char *s1, char *s2);
 int			unset_cmd(t_data *data, t_cmd *command);
 int			export_cmd(t_data *data, t_cmd *command);

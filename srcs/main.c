@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 20:04:10 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/24 17:07:24 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/25 01:25:23 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ int	g_exit;
 
 int	mini_exit(t_data *data)
 {
-	ft_putstr_fd("\nexit", 2);
+	ft_putstr_fd("exit\n", 2);
 	free_everything(data);
 	exit(g_exit % 255);
 	return (0);
 }
 
-int	only_whitespaces(char *str)
+int	only_wh(char *str)
 {
 	int	i;
 
@@ -42,12 +42,13 @@ int	set_data(t_data *data, char **envp)
 	buf = ft_strjoin(data->line, " ", 0);
 	data->token_list = lexer(buf);
 	free(buf);
+	data->cmds = NULL;
 	if (data->token_list == NULL)
 		return (FAILURE);
 	data->token_list = second_scan(data);
 	if (data->token_list == NULL)
-		exit_error("Error.😱😱😱\n");
-	expand(data);
+		exit_error("Error.😱😱😱\n", data);
+	data->token_list = expand(data);
 	data->token_list = join_litterals(data);
 	data->token_list = suppr_quotes(data);
 	data->token_list = join_litt(data);
@@ -92,18 +93,18 @@ int	main(int argc, char **argv, char **envp)
 	data = ft_calloc(sizeof(t_data), 1);
 	if (!data)
 		return (1);
-	data->env = setup_env(envp);
-	data->env_arr = dupenv(data->env);
-	g_exit = 0;
+	init_env(data, envp);
 	while (1)
 	{
 		setup_signal();
 		data->line = readline(COLOR_ORANGE PS1 COLOR_RESET);
-		if (data->line && *data->line != '\0' && only_whitespaces(data->line) \
-		== FALSE)
+		if (data->line && *data->line != '\0' && only_wh(data->line) == FALSE)
 		{
 			if (handle_input(data, envp) == FAILURE)
-				break ;
+			{
+				temp_free(data);
+				continue ;
+			}
 		}
 		else if (data->line == NULL)
 			mini_exit(data);

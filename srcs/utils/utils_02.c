@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 21:53:10 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/22 21:49:17 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/25 01:14:15 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,11 @@ t_envlist	*ft_envlstnew(char *name, char *value)
 		return (NULL);
 	elem->name = name;
 	elem->value = value;
+	if (name && value)
+	{
+		elem->string = ft_strjoin(name, "=", 0);
+		elem->string = ft_strjoin(elem->string, value, 1);
+	}
 	elem->next = NULL;
 	elem->prev = NULL;
 	return (elem);
