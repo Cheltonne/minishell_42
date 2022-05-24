@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 22:26:27 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/24 11:28:19 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/24 16:13:23 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # define CHILD 0
 # define COLOR_ORANGE "\1\033[38;5;208m\2"
 # define COLOR_RESET "\1\x1b[0m\2"
-# define PS1 "minishell de ses Morts\1💀💀󠁩󠁲>󠀱󠀶󠁿\2 "
+# define PS1 "minishell de ses Morts> "
 
 # include "libft/libft.h"
 # include "gnl/get_next_line.h"
@@ -158,7 +158,7 @@ t_tklist	*redir_scan(t_data *data);
 t_tklist	*suppr_quotes(t_data *data);
 t_tklist	*join_litt(t_data *data);
 int			exit_cmd(t_data *data, t_cmd *command);
-void		verify_main_args(int argc, char** argv, char **envp);
+void		verify_main_args(int argc, char** argv);
 void		wait_wrapper(t_data *data);
 void		temp_free(t_data *data);
 void		free_everything(t_data *data);
@@ -171,5 +171,6 @@ void		heredoc_sighandler(int sig);
 void		signal_heredoc(int signal);
 void		free_env(t_envlist *lst);
 void    	dual_free(void **ptr, void **ptr2);
+int			egal_expand(char *name);
 
 #endif

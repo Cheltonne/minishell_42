@@ -6,13 +6,13 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 14:55:24 by phaslan           #+#    #+#             */
-/*   Updated: 2022/05/24 11:28:43 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/24 15:28:48 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	env_export(t_data *data)
+void	env_export(t_data *data, t_cmd *command)
 {	
 	t_envlist	*copy;
 	char		*name;
@@ -25,14 +25,14 @@ void	env_export(t_data *data)
 		while (copy->name != NULL)
 		{
 			name = ft_strjoin(copy->name, "=", 0);
-			ft_putstr_fd("export ", 2);
-			ft_putstr_fd(name, 2);
-			ft_putstr_fd(copy->value, 2);
-			ft_putstr_fd("\n", 2);
+			ft_putstr_fd("export ", command->out);
+			ft_putstr_fd(name, command->out);
+			ft_putstr_fd(copy->value, command->out);
+			ft_putstr_fd("\n", command->out);
 			copy = copy->next;
+			free(name);
 		}
 	}
-	free(name);
 }
 
 int	env_rp_value(char *name, t_envlist *env, char *value)
@@ -102,7 +102,7 @@ int	export_cmd(t_data *data, t_cmd *command)
 	i = 1;
 	lst = ft_envlstlast(data->env);
 	if (!command->cmd[1])
-		env_export(data);
+		env_export(data, command);
 	while (command->cmd[i])
 	{
 		name = set_name(command->cmd[i]);

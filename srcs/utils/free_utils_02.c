@@ -6,7 +6,7 @@
 /*   By: chajax <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 11:20:22 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/24 11:20:51 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/24 16:09:23 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,10 @@ void	free_everything(t_data *data)
 	free_env(data->env);
 	ft_chartable_free(data->env_arr);
 	free(data);
+}
+
+void	dual_free(void **ptr, void **ptr2)
+{
+	free((*ptr));
+	free((*ptr2));
 }

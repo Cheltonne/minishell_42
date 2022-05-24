@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 15:40:45 by phaslan           #+#    #+#             */
-/*   Updated: 2022/05/24 11:25:55 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/24 16:17:38 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,20 +79,25 @@ char	**dupenv(t_envlist *env)
 	{
 		str = ft_strjoin(copy->name, copy->value, 0);
 		copy = copy->next;
-		ret[i] = ft_strdup(str);
-		free(str);
-		str = NULL;
+		ret[i] = str;
 		i++;
 	}
 	ret[i] = NULL;
-	copy = env;
 	return (ret);
 }
 
-void	dual_free(void **ptr, void **ptr2)
+t_envlist	*no_envp(void)
 {
-	free((*ptr));
-	free((*ptr2));
+	t_envlist	*ret;
+	char		*name;
+
+	name = NULL;
+	name = getcwd(NULL, 0);
+	ret = ft_envlstnew("PWD", name);
+	ft_envlstadd_back(&ret, ft_envlstnew("SHLVL", "1"));
+	ft_envlstadd_back(&ret, ft_envlstnew("_", "/usr/bin/env"));
+	ft_envlstadd_back(&ret, ft_envlstnew(NULL, NULL));
+	return (ret);
 }
 
 t_envlist	*setup_env(char **envp)
@@ -105,8 +110,8 @@ t_envlist	*setup_env(char **envp)
 	i = 0;
 	name = NULL;
 	value = NULL;
-	if (envp == NULL)
-		return (NULL);
+	if (*envp == NULL)
+		return (no_envp());
 	while (envp[i])
 	{
 		name = set_name(envp[i]);
@@ -115,8 +120,8 @@ t_envlist	*setup_env(char **envp)
 		value = set_value(envp[i]);
 		if (value == NULL)
 			return (NULL);
-		(void)(((i == 0) && (ret = ft_envlstnew(name, value))) ||\
-		(ft_envlstadd_back(&ret, ft_envlstnew(name, value))));
+		(void)(((i == 0) && (ret = ft_envlstnew(name, value)))
+		|| (ft_envlstadd_back(&ret, ft_envlstnew(name, value))));
 		i++;
 	}
 	ft_envlstadd_back(&ret, ft_envlstnew(NULL, NULL));

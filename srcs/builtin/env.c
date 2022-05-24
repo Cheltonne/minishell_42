@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 14:38:38 by phaslan           #+#    #+#             */
-/*   Updated: 2022/05/23 12:58:18 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/24 17:12:25 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,8 @@ int	env_cmd(t_data *data)
 			ft_putstr_fd(copy->value, data->cmds[0]->out);
 			ft_putstr_fd("\n", data->cmds[0]->out);
 			copy = copy->next;
+			free(name);
 		}
 	}
-	free(name);
 	return (SUCCESS);
 }

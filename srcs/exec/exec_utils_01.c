@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 16:56:07 by phaslan           #+#    #+#             */
-/*   Updated: 2022/05/23 23:34:56 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/24 16:37:55 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,7 @@ int	execute(t_data *data, char **cmd, char **envp)
 	final_cmd = search_path(paths, cmd[0]);
 	if (final_cmd == 0)
 	{
+		ft_tklstclear(&data->token_list, &free);
 		clean_all(paths, cmd, final_cmd);
 		perror("command not cucked");
 		exit (127);
@@ -108,7 +109,6 @@ int	execute(t_data *data, char **cmd, char **envp)
 	else
 		execve(final_cmd, cmd, envp);
 	clean_all(paths, cmd, final_cmd);
-	free_everything(data);
 	ft_error("command not found");
 	exit (g_exit);
 }

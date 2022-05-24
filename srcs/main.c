@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 20:04:10 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/24 11:28:08 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/24 17:07:24 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,9 +40,6 @@ int	set_data(t_data *data, char **envp)
 	char	*buf;
 
 	buf = ft_strjoin(data->line, " ", 0);
-	data->cmds = ft_calloc(sizeof(t_cmd), 1);
-	if (data->cmds == NULL)
-		return (FAILURE);
 	data->token_list = lexer(buf);
 	free(buf);
 	if (data->token_list == NULL)
@@ -55,6 +52,9 @@ int	set_data(t_data *data, char **envp)
 	data->token_list = suppr_quotes(data);
 	data->token_list = join_litt(data);
 	data->pipe_nb = pipe_count(data->token_list);
+	data->cmds = ft_calloc(sizeof(t_cmd), data->pipe_nb + 1);
+	if (data->cmds == NULL)
+		return (FAILURE);
 	return (SUCCESS);
 	(void)envp;
 }
@@ -88,7 +88,7 @@ int	main(int argc, char **argv, char **envp)
 {
 	t_data	*data;
 
-	verify_main_args(argc, argv, envp);
+	verify_main_args(argc, argv);
 	data = ft_calloc(sizeof(t_data), 1);
 	if (!data)
 		return (1);
