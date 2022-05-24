@@ -31,6 +31,7 @@ UTILS_FILES = utils_01 \
 			  utils_03 \
 			  utils_04 \
 			  free_utils_01 \
+			  free_utils_02 \
 
 ERROR_FILES = error_handling \
 

@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 15:40:45 by phaslan           #+#    #+#             */
-/*   Updated: 2022/05/23 23:55:15 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/24 11:25:55 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,17 +79,20 @@ char	**dupenv(t_envlist *env)
 	{
 		str = ft_strjoin(copy->name, copy->value, 0);
 		copy = copy->next;
-		ret[i] = str;
+		ret[i] = ft_strdup(str);
+		free(str);
+		str = NULL;
 		i++;
 	}
 	ret[i] = NULL;
+	copy = env;
 	return (ret);
 }
 
-void	dual_free(void *ptr, void *ptr2)
+void	dual_free(void **ptr, void **ptr2)
 {
-	free(ptr);
-	free(ptr2);
+	free((*ptr));
+	free((*ptr2));
 }
 
 t_envlist	*setup_env(char **envp)

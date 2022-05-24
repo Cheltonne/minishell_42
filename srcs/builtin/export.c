@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 14:55:24 by phaslan           #+#    #+#             */
-/*   Updated: 2022/05/23 22:37:45 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/24 11:28:43 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,7 @@ char	*get_venv(t_envlist *env, char *name)
 
 void	node_add(t_envlist *lst, char *name, char *value, t_data *data)
 {
-	char *buf;
+	char	*buf;
 
 	buf = get_venv(data->env, name);
 	if (buf)
@@ -113,8 +113,7 @@ int	export_cmd(t_data *data, t_cmd *command)
 		value = set_value(command->cmd[i]);
 		(void)((value) || (value = ft_strdup("")));
 		node_add(lst, name, value, data);
-		free(name);
-		free(value);
+		dual_free((void **)&name, (void **)&value);
 		i++;
 	}
 	return (0);
