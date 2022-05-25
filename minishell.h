@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 22:26:27 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/25 03:01:15 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/25 09:35:48 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@
 # define WRITE 1
 # define READ 0
 # define CHILD 0
+# define SYNTAX_ERROR 42
 # define COLOR_ORANGE "\1\033[38;5;208m\2"
 # define COLOR_RESET "\1\x1b[0m\2"
 # define PS1 "minishell de ses Morts> "
@@ -175,4 +176,7 @@ void    	dual_free(void **ptr, void **ptr2);
 int			egal_expand(char *name);
 void		init_env(t_data *data, char **envp);
 void		free_cmds(t_data *data);
+int			handle_formatting(t_data *data);
+t_tklist	*syntax_error(t_data *data);
+
 #endif

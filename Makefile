@@ -13,6 +13,8 @@ LEXING_FILES =	lexer \
 				env \
 				expand \
 				redir_scan \
+				lexing_utils \
+				syntax_error \
 
 EXEC_FILES = exec_utils_01 \
 			 exec_utils_02 \

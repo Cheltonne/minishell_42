@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 20:04:10 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/25 08:55:03 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/25 09:37:04 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ int	mini_exit(t_data *data)
 	free(data);
 	exit(g_exit % 255);
 	return (0);
-	// (void)data;
 }
 
 int	only_wh(char *str)
@@ -44,8 +43,10 @@ int	only_wh(char *str)
 
 int	set_data(t_data *data, char **envp)
 {
+	int	i;
 	char	*buf;
 
+	i = 0;
 	buf = ft_strjoin(data->line, " ", 0);
 	data->token_list = lexer(buf);
 	free(buf);
@@ -55,34 +56,28 @@ int	set_data(t_data *data, char **envp)
 	data->token_list = second_scan(data);
 	if (data->token_list == NULL)
 		exit_error("Error.😱😱😱\n", data);
-	data->token_list = expand(data);
-	data->token_list = join_litterals(data);
-	data->token_list = suppr_quotes(data);
-	data->token_list = join_litt(data);
 	data->pipe_nb = pipe_count(data->token_list);
 	data->cmds = ft_calloc(sizeof(t_cmd), data->pipe_nb + 1);
 	if (data->cmds == NULL)
 		return (FAILURE);
+	if (handle_formatting(data) == SYNTAX_ERROR)
+		return (SYNTAX_ERROR);
+	while (i < data->pipe_nb + 1)
+		data->cmds[i++] = cmd_builder(&data->token_list);
 	return (SUCCESS);
 	(void)envp;
 }
 
 int	handle_input(t_data *data, char **envp)
 {
-	int	i;
+	int	set_data_ret;
 
-	i = 0;
 	add_history(data->line);
-	if (set_data(data, envp) == FAILURE)
+	set_data_ret = set_data(data, envp);
+	if (set_data_ret == FAILURE)
 		return (FAILURE);
-	data->token_list = redir_scan(data);
-	if (data->token_list == NULL)
-	{
-		ft_tklstclear(&data->token_list, &free);
-		return (SUCCESS);
-	}
-	while (i < data->pipe_nb + 1)
-		data->cmds[i++] = cmd_builder(&data->token_list);
+	if (set_data_ret == SYNTAX_ERROR)
+		return (SYNTAX_ERROR);
 	if (data->cmds == NULL)
 		return (FAILURE);
 	if (data->pipe_nb == 0)
@@ -110,7 +105,7 @@ int	main(int argc, char **argv, char **envp)
 		data->line = readline(COLOR_ORANGE PS1 COLOR_RESET);
 		if (data->line && *data->line != '\0' && only_wh(data->line) == FALSE)
 		{
-			if (handle_input(data, envp) == FAILURE)
+			if (handle_input(data, envp) == FAILURE)//attention a la valeur deretour de redir_scan
 				continue ;
 		}
 		else if (data->line == NULL)

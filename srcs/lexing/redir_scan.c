@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 15:40:45 by phaslan           #+#    #+#             */
-/*   Updated: 2022/05/25 07:54:37 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/25 09:36:44 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,9 +87,9 @@ t_tklist	*redir_scan(t_data *data)
 	t_tklist	*tk;
 
 	tk = data->token_list;
-	tk = arrow_ncheck(tk);
 	if (tk == NULL)
 		return (NULL);
+	tk = arrow_ncheck(tk);
 	while (tk->type != END)
 	{
 		if (tk->type == R_REDIR || tk->type == L_REDIR)
