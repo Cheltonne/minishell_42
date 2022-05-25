@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 20:04:10 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/25 09:37:04 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/25 15:15:20 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,11 @@ int	set_data(t_data *data, char **envp)
 	if (handle_formatting(data) == SYNTAX_ERROR)
 		return (SYNTAX_ERROR);
 	while (i < data->pipe_nb + 1)
-		data->cmds[i++] = cmd_builder(&data->token_list);
+	{
+		data->cmds[i] = cmd_builder(data, &data->token_list);
+		if (data->cmds[i++] == NULL)
+			return (cmds_null_exit(data));
+	}
 	return (SUCCESS);
 	(void)envp;
 }

@@ -6,13 +6,13 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 16:56:07 by phaslan           #+#    #+#             */
-/*   Updated: 2022/05/25 08:39:26 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/25 15:08:35 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-t_cmd	*cmd_builder(t_tklist **head)
+t_cmd	*cmd_builder(t_data *data, t_tklist **head)
 {
 	int			i;
 	t_cmd		*ret;
@@ -24,9 +24,15 @@ t_cmd	*cmd_builder(t_tklist **head)
 		return (NULL);
 	ret->in = 0;
 	ret->out = 1;
-	cmd_builder_norm(head, &ret, &i);
+	if (cmd_builder_norm(head, &ret, &i) == FAILURE)
+	{	
+		free(ret->cmd);
+		free(ret);
+		return (NULL);
+	}
 	ret->cmd[i] = NULL;
 	return (ret);
+	(void)data;
 }
 
 char	**get_all_paths(char **enpv, int line)

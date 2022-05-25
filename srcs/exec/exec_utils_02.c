@@ -6,13 +6,13 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 17:40:59 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/25 08:45:13 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/25 14:15:43 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	cmd_builder_norm(t_tklist **head, t_cmd **ret, int *i)
+int	cmd_builder_norm(t_tklist **head, t_cmd **ret, int *i)
 {
 	while ((*head)->type != END && (*head)->type != PIPE)
 	{
@@ -25,7 +25,8 @@ void	cmd_builder_norm(t_tklist **head, t_cmd **ret, int *i)
 				(*ret)->cmd[(*i)] = ft_strdup((*head)->value);
 				(*i) += 1;
 			}
-			redir_anal(head, ret, i);
+			if (redir_anal(head, ret, i) == FAILURE)
+				return (FAILURE);
 			if ((*head)->type != END)
 				(*head) = (*head)->next;
 		}
@@ -35,6 +36,7 @@ void	cmd_builder_norm(t_tklist **head, t_cmd **ret, int *i)
 			break ;
 		}
 	}
+	return (SUCCESS);
 }
 
 int	pipe_count(t_tklist *token_list)

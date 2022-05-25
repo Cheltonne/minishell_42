@@ -6,23 +6,18 @@
 /*   By: chajax <chajax@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 15:45:09 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/25 10:17:09 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/25 15:12:17 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-void	redir_anal(t_tklist **head, t_cmd **ret, int *i)
+int	redir_anal(t_tklist **head, t_cmd **ret, int *i)
 {
 	if ((*head)->type == L_REDIR)
-		(void)((left_redirection(ret, &head)) || ((*ret)->cmd[(*i++)] = NULL));
+		return (left_redirection(ret, &head));
 	else if ((*head)->type == R_REDIR)
-	{
-		if (right_redirection(ret, &head))
-			;
-		else
-			(*ret)->cmd[(*i++)] = NULL;
-	}
+		return (right_redirection(ret, &head));
 	else if ((*head)->type == APPEND)
 	{
 		if (append(ret, &head))
@@ -31,12 +26,8 @@ void	redir_anal(t_tklist **head, t_cmd **ret, int *i)
 			(*ret)->cmd[(*i++)] = NULL;
 	}
 	else if ((*head)->type == HERE_DOC)
-	{
-		if (here_doc(ret, &head))
-			;
-		else
-			(*ret)->cmd[(*i++)] = NULL;
-	}
+		return (here_doc(ret, &head));
+	return (3);
 }
 
 int	left_redirection(t_cmd **ret, t_tklist ***head)
@@ -114,6 +105,8 @@ int	here_doc(t_cmd **ret, t_tklist ***head)
 			return (FAILURE);
 		}
 		**head = (**head)->next;
+		if (here_doc_empty((*ret)->in) == TRUE)
+			return (FAILURE);
 	}
 	return (SUCCESS);
 }

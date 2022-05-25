@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 22:26:27 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/25 09:35:48 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/25 14:47:44 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,8 +105,8 @@ t_tklist	*lexer(char *line);
 int			ft_table_count(void **file);
 int			sp_char_nb(t_tklist *tokens, t_type type);
 t_tklist	*second_scan(t_data *data);
-t_cmd		*cmd_builder(t_tklist **head);
-void		cmd_builder_norm(t_tklist **head, t_cmd **ret, int *i);
+t_cmd		*cmd_builder(t_data *data, t_tklist **head);
+int			cmd_builder_norm(t_tklist **head, t_cmd **ret, int *i);
 int			clean_all(char **paths, char **cmdarg, char *final);
 char		*search_path(char **paths, char *cmdarg);
 char		**get_all_paths(char **enpv, int line);
@@ -148,7 +148,7 @@ char		*get_venv(t_envlist *env, char *name);
 int			fork_pipes(int n, t_data *data);
 int			spawn_proc(int in, int out, t_data *data, t_cmd *command);
 void		fork_wrapper(pid_t *child);
-void		redir_anal(t_tklist **head, t_cmd **ret, int *i);
+int			redir_anal(t_tklist **head, t_cmd **ret, int *i);
 int			left_redirection(t_cmd **ret, t_tklist ***head);
 int			right_redirection(t_cmd **ret, t_tklist ***head);
 int			append(t_cmd **ret, t_tklist ***head);
@@ -178,5 +178,7 @@ void		init_env(t_data *data, char **envp);
 void		free_cmds(t_data *data);
 int			handle_formatting(t_data *data);
 t_tklist	*syntax_error(t_data *data);
+int			here_doc_empty(int fd);
+int			cmds_null_exit(t_data *data);
 
 #endif
