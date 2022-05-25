@@ -6,7 +6,7 @@
 /*   By: chajax </var/spool/mail/chajax>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/05/27 14:04:10 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/15 16:24:12 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/25 16:35:12 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 size_t	ft_strlen(const char *str)
 {
-	if (str == NULL)
-		return(0);
 	size_t	i;
 
+	if (str == NULL)
+		return (0);
 	i = 0;
 	while (str[i])
 		i++;
