@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 15:40:45 by phaslan           #+#    #+#             */
-/*   Updated: 2022/05/25 02:37:40 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/25 07:54:37 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,10 @@ t_tklist	*redir_scan(t_data *data)
 		{
 			g_exit = arrow_analyse(tk);
 			if (g_exit == 2)
+			{
+				ft_tklstclear(&data->token_list, &free);
 				return (NULL);
+			}
 			if (ft_strlen(tk->value) == 2)
 			{
 				if (tk->type == R_REDIR)

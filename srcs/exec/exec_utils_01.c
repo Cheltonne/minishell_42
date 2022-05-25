@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 16:56:07 by phaslan           #+#    #+#             */
-/*   Updated: 2022/05/25 02:49:51 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/25 08:39:26 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,7 +101,6 @@ int	execute(t_data *data, char **cmd, char **envp)
 	final_cmd = search_path(paths, cmd[0]);
 	if (final_cmd == 0)
 	{
-		ft_tklstclear(&data->token_list, &free);
 		clean_all(paths, cmd, final_cmd);
 		free_everything(data);
 		perror("command not found");

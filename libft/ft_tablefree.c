@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/20 15:59:47 by phaslan           #+#    #+#             */
-/*   Updated: 2022/05/24 19:45:43 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/25 07:33:35 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ void	ft_chartable_free(char **table)
 	int	i;
 
 	i = 0;
+	if (table == NULL)
+		return ;
 	while (table[i] != NULL)
 	{
 		free(table[i]);
@@ -24,4 +26,5 @@ void	ft_chartable_free(char **table)
 		i++;
 	}
 	free(table);
+	table = NULL;
 }
