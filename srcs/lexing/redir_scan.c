@@ -6,13 +6,13 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 15:40:45 by phaslan           #+#    #+#             */
-/*   Updated: 2022/05/25 13:56:08 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/25 16:15:07 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../minishell.h"
 
-extern int g_exit;
+extern int	g_exit;
 
 t_tklist	*arrow_ncheck(t_tklist *tk)
 {

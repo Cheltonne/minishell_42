@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 16:11:00 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/25 01:19:45 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/25 16:21:31 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,12 @@ void	verify_main_args(int argc, char **argv)
 	}
 }
 
-void	exit_error(char *error_msg, t_data *data)
+int	exit_error(char *error_msg, t_data *data)
 {
 	ft_putstr_fd(error_msg, 2);
 	free_everything(data);
 	exit(EXIT_FAILURE);
+	return (FAILURE);
 }
 
 int	egal_expand(char *name)

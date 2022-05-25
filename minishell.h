@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 22:26:27 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/25 14:47:44 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/25 16:21:52 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ char		*search_path(char **paths, char *cmdarg);
 char		**get_all_paths(char **enpv, int line);
 int			execute(t_data *data, char **cmd, char **envp);
 int			exec_single_cmd(t_data *data);
-void		exit_error(char *error_msg, t_data *data);
+int			exit_error(char *error_msg, t_data *data);
 int			pipe_count(t_tklist *token_list);
 int			setup_signal(void);
 t_tklist	*ft_tklstnew(t_type type, char *value);
@@ -120,7 +120,7 @@ t_tklist	*ft_tklstlast(t_tklist *lst);
 int			ft_tklstsize(t_tklist *lst);
 int			ft_tklstadd_back(t_tklist **alst, t_tklist *new);
 int			ft_envlstadd_back(t_envlist **alst, t_envlist *new);
-int			set_data(t_data *data, char **envp);
+int			set_data(t_data *data);
 char		**dupenv(t_envlist *env);
 t_envlist	*setup_env(t_data *data, char **envp);
 t_envlist	*ft_envlstnew(char *name, char *value);

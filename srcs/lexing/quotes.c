@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 15:55:18 by phaslan           #+#    #+#             */
-/*   Updated: 2022/05/19 14:11:03 by phaslan          ###   ########.fr       */
+/*   Updated: 2022/05/25 16:27:37 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,10 @@ t_tklist	*second_scan(t_data *data)
 	}
 	if (sp_char_nb(head, S_QUOTE) % 2 != 0 || sp_char_nb(head, D_QUOTE)
 		% 2 != 0)
+	{
+		ft_tklstclear(&head, &free);
 		return (NULL);
+	}
 	data->token_list = head;
 	return (head);
 }

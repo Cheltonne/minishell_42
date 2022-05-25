@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 20:04:10 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/25 15:15:20 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/25 16:22:58 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,9 +41,9 @@ int	only_wh(char *str)
 		return (FALSE);
 }
 
-int	set_data(t_data *data, char **envp)
+int	set_data(t_data *data)
 {
-	int	i;
+	int		i;
 	char	*buf;
 
 	i = 0;
@@ -54,8 +54,7 @@ int	set_data(t_data *data, char **envp)
 	if (data->token_list == NULL)
 		return (FAILURE);
 	data->token_list = second_scan(data);
-	if (data->token_list == NULL)
-		exit_error("Error.😱😱😱\n", data);
+	(void)((data->token_list == NULL) && (exit_error("Error.😱😱😱\n", data)));
 	data->pipe_nb = pipe_count(data->token_list);
 	data->cmds = ft_calloc(sizeof(t_cmd), data->pipe_nb + 1);
 	if (data->cmds == NULL)
@@ -69,15 +68,14 @@ int	set_data(t_data *data, char **envp)
 			return (cmds_null_exit(data));
 	}
 	return (SUCCESS);
-	(void)envp;
 }
 
-int	handle_input(t_data *data, char **envp)
+int	handle_input(t_data *data)
 {
 	int	set_data_ret;
 
 	add_history(data->line);
-	set_data_ret = set_data(data, envp);
+	set_data_ret = set_data(data);
 	if (set_data_ret == FAILURE)
 		return (FAILURE);
 	if (set_data_ret == SYNTAX_ERROR)
@@ -109,7 +107,7 @@ int	main(int argc, char **argv, char **envp)
 		data->line = readline(COLOR_ORANGE PS1 COLOR_RESET);
 		if (data->line && *data->line != '\0' && only_wh(data->line) == FALSE)
 		{
-			if (handle_input(data, envp) == FAILURE)//attention a la valeur deretour de redir_scan
+			if (handle_input(data) == FAILURE)
 				continue ;
 		}
 		else if (data->line == NULL)

@@ -6,7 +6,7 @@
 /*   By: chajax <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 11:20:22 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/25 15:00:15 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/25 16:28:10 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,8 @@ void	free_cmds(t_data *data)
 	int	i;
 
 	i = 0;
-	printf("INSIDE of free cmds\n");
 	if (data->cmds == NULL)
-			return ;
+		return ;
 	while (i < data->pipe_nb + 1)
 	{
 		if (data->cmds[i] != NULL)
@@ -36,12 +35,10 @@ void	free_cmds(t_data *data)
 
 void	temp_free(t_data *data)
 {
-	printf("Doing temp free\n");
 	if (data->line != NULL)
 		free(data->line);
 	if (data->token_list != NULL)
 	{
-		printf("Doing free token list\n");
 		while (data->token_list->prev != NULL)
 			data->token_list = data->token_list->prev;
 		ft_tklstclear(&data->token_list, &free);
@@ -49,7 +46,6 @@ void	temp_free(t_data *data)
 	if (data->cmds != NULL)
 	{
 		free_cmds(data);
-		printf("Doing free cmds\n");
 	}
 	unlink(".here_doc");
 }

@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 17:40:59 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/25 14:15:43 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/25 16:16:31 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,6 @@ int	exec_single_cmd(t_data *data)
 		g_exit = exec_builtin(data, data->cmds[0]);
 		return (SUCCESS);
 	}
-	printf("Ce qui est passer a execve est %s...ETONNANT\n", data->cmds[0]->cmd[0]);
 	fork_wrapper(&data->cmds[0]->id);
 	signal(SIGINT, &sig_fork);
 	if (data->cmds[0]->id == 0)

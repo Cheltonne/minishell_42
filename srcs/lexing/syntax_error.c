@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/25 09:04:18 by phaslan           #+#    #+#             */
-/*   Updated: 2022/05/25 09:46:13 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/25 16:29:16 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ t_tklist	*pipe_scan(t_data *data)
 		if (tk->type == LITTERAL)
 			x = 1;
 		if (tk->type == PIPE && x == 0)
-			return (pip_error("bash: syntax error near unexpected token `|'"));
+			return (pip_error("bash: syntax error near unexpected token `|'\n"));
 		else if (tk->type == PIPE && x == 1)
 		{
 			x = 0;
