@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/04 20:04:10 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/25 01:25:23 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/25 03:25:10 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,16 @@ int	g_exit;
 int	mini_exit(t_data *data)
 {
 	ft_putstr_fd("exit\n", 2);
-	free_everything(data);
+	free(data->line);
+	ft_tklstclear(&data->token_list, &free);
+	if (data->cmds != NULL)
+		free_cmds(data);
+	free_env(data->env);
+	free(data->env_arr);
+	free(data);
 	exit(g_exit % 255);
 	return (0);
+	// (void)data;
 }
 
 int	only_wh(char *str)
@@ -102,7 +109,7 @@ int	main(int argc, char **argv, char **envp)
 		{
 			if (handle_input(data, envp) == FAILURE)
 			{
-				temp_free(data);
+				//	temp_free(data);
 				continue ;
 			}
 		}

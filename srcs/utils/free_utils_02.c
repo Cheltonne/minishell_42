@@ -6,7 +6,7 @@
 /*   By: chajax <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 11:20:22 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/24 22:34:46 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/25 03:22:10 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,29 +15,22 @@
 void	free_cmds(t_data *data)
 {
 	int	i;
-	int	o;
 
 	i = 0;
 	while (i < data->pipe_nb + 1)
 	{
-		o = 0;
-		while (o < ft_table_count((void **)data->cmds[i]->cmd))
-		{
-			free(data->cmds[i]->cmd[o]);
-			o++;
-		}
-		free(data->cmds[i]->cmd);
-		free(data->cmds[i]);
+		ft_chartable_free(data->cmds[i]->cmd);
 		i++;
 	}
-	free(data->cmds);
 }
 
 void	temp_free(t_data *data)
 {
-	free(data->line);
-	ft_tklstclear(&data->token_list, &free);
-	if (data->cmds != NULL)
+	if (data->line != NULL)
+		free(data->line);
+	if (data->token_list != NULL)
+		ft_tklstclear(&data->token_list, &free);
+	if (data->cmds == NULL)
 		free_cmds(data);
 	unlink(".here_doc");
 }
@@ -45,8 +38,10 @@ void	temp_free(t_data *data)
 void	free_everything(t_data *data)
 {
 	temp_free(data);
-	free_env(data->env);
-	free(data->env_arr);
+	if (data->env != NULL)
+		free_env(data->env);
+	if (*data->env_arr != NULL)
+		free(data->env_arr);
 	free(data);
 }
 
