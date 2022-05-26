@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/09 16:50:45 by phaslan           #+#    #+#             */
-/*   Updated: 2022/05/23 16:57:21 by phaslan          ###   ########.fr       */
+/*   Updated: 2022/05/26 12:51:26 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,17 @@ void	sig_fork(int sig)
 	}
 }
 
+void	sig_quit(int sig)
+{
+	struct sigaction	sigquit_act;
+
+	ft_bzero(&sigquit_act, sizeof(struct sigaction));
+	sigquit_act.sa_sigaction = NULL;
+	sigquit_act.sa_handler = SIG_DFL;
+	if (sig == SIGQUIT)
+		ft_putstr_fd("quit (core dumped)\n", 2);
+}
+
 int	setup_signal(void)
 {
 	struct sigaction	sigquit_act;
@@ -46,4 +57,10 @@ int	setup_signal(void)
 	sigquit_act.sa_handler = SIG_IGN;
 	sigaction(SIGQUIT, &sigquit_act, NULL);
 	return (0);
+}
+
+void	dual_signals(void)
+{
+	signal(SIGINT, &sig_fork);
+	signal(SIGQUIT, &sig_quit);
 }

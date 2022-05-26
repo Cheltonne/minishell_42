@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/19 20:47:47 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/25 00:58:21 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/26 12:51:40 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	dup_wrapper(int oldfd, int newfd)
 int	spawn_proc(int in, int out, t_data *data, t_cmd *command)
 {
 	fork_wrapper(&command->id);
+	dual_signals();
 	if (command->id == CHILD)
 	{
 		if (in != STDIN_FILENO)

@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/07 17:40:59 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/25 16:16:31 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/26 12:47:11 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,7 @@ int	exec_single_cmd(t_data *data)
 	}
 	fork_wrapper(&data->cmds[0]->id);
 	signal(SIGINT, &sig_fork);
+	signal(SIGQUIT, &sig_quit);
 	if (data->cmds[0]->id == 0)
 	{
 		if (data->cmds[0]->in != 0 || data->cmds[0]->out != 1)

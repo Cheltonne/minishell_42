@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 22:26:27 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/26 12:27:06 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/26 12:51:20 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -180,5 +180,7 @@ int			handle_formatting(t_data *data);
 t_tklist	*syntax_error(t_data *data);
 int			here_doc_empty(int fd);
 int			cmds_null_exit(t_data *data);
+void		sig_quit(int sig);
+void		dual_signals(void);
 
 #endif
