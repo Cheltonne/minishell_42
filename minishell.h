@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 22:26:27 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/25 16:34:00 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/26 12:27:06 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -172,7 +172,7 @@ void		sig_fork(int sig);
 void		heredoc_sighandler(int sig);
 void		signal_heredoc(int signal);
 void		free_env(t_envlist *lst);
-void		dual_free(void **ptr, void **ptr2);
+int			dual_free(void **ptr, void **ptr2);
 int			egal_expand(char *name);
 void		init_env(t_data *data, char **envp);
 void		free_cmds(t_data *data);

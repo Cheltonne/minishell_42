@@ -6,7 +6,7 @@
 /*   By: chajax <marvin@42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 11:20:22 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/25 16:28:10 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/26 12:26:28 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,10 +60,11 @@ void	free_everything(t_data *data)
 	free(data);
 }
 
-void	dual_free(void **ptr, void **ptr2)
+int	dual_free(void **ptr, void **ptr2)
 {
 	free((*ptr));
 	free((*ptr2));
+	return (SUCCESS);
 }
 
 int	cmds_null_exit(t_data *data)

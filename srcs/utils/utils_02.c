@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/10 21:53:10 by chajax            #+#    #+#             */
-/*   Updated: 2022/05/25 01:14:15 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/26 12:17:35 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ t_envlist	*ft_envlstnew(char *name, char *value)
 {
 	t_envlist	*elem;
 
-	elem = malloc(sizeof(t_envlist));
+	elem = ft_calloc(sizeof(t_envlist), 1);
 	if (!elem)
 		return (NULL);
 	elem->name = name;

@@ -6,7 +6,7 @@
 /*   By: phaslan <phaslan@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/12 14:55:24 by phaslan           #+#    #+#             */
-/*   Updated: 2022/05/24 15:28:48 by chajax           ###   ########.fr       */
+/*   Updated: 2022/05/26 12:26:51 by chajax           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -109,7 +109,7 @@ int	export_cmd(t_data *data, t_cmd *command)
 		if (!name)
 			return (1);
 		if (not_valid_env_arg(name, 3))
-			return (1);
+			return (dual_free((void **)&name, (void **)&value));
 		value = set_value(command->cmd[i]);
 		(void)((value) || (value = ft_strdup("")));
 		node_add(lst, name, value, data);
