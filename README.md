@@ -15,3 +15,4 @@ The minishell project consists of coding a somewhat minimalist shell, taking bas
 Simply clone, make and launch ./minishell. If necessary, install the readline C library via <code>sudo apt-get install libreadline6 libreadline6-dev</code>
 
 ![screenshot](final_grade.png)
+Done in collaboration with [Philadelphi](https://github.com/philadelphi).
