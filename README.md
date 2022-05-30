@@ -8,3 +8,6 @@ Redirections : <, <<, >, >>.
 Variable expansion using the $ sign.
 Accurate command exit codes as verified using the $? environment variable.
 Signals (discriminating between interactive and non-interactive modes): Ctrl + C, Ctrl + D, Ctrl + \
+
+To try :
+Simply clone, make and launch ./minishell. If necessary, install the readline C library via <code>sudo apt-get install libreadline6 libreadline6-dev</code>
